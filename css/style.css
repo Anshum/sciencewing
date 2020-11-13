@@ -98,11 +98,11 @@ top: 64%;
 }
 .carousel-indicators li {
   background-color: rgba(0,0,0,0);
-  border: 1px solid #BC2A87;
+  border: 1px solid #1B4F72;
   border-radius: 0;
 }
 .carousel-indicators .active {
-  background-color: #BC2A87;
+  background-color: #1B4F72;
 }
 .caption h2{
 color: #FFFFFF;
@@ -314,7 +314,7 @@ p {
 ---------------------------------*/
 
 #header_wrapper {
-    background: #BC2A87;
+    background: #1B4F72;
     padding: 15px 0px;
     position: relative;
     border-top: 2px solid #fff;
@@ -614,7 +614,7 @@ div#main-nav {
 
 #service {
     padding: 60px 0px;
-    background: #BC2A87;
+    background: #1B4F72;
 }
 #service h2{
   color: #fff;
@@ -676,7 +676,7 @@ color:#fff;
 }
 .service_block p {
     font-size: 16px;
-    color: #FFC0E8;
+    color: #ffffff;
     margin: 0 0 35px 0;
 }
 	
@@ -1019,7 +1019,7 @@ background-position-y: 70px;
 	position: absolute;
 	font-family: FontAwesome;
 	font-size: 1.125em;
-	color: #BC2A87;
+	color: #1B4F72;
 	left: 0px;
 	top: 3px;
 }
@@ -1385,7 +1385,7 @@ transition: all .3s;
 ---------------------------------*/
 
 .footer_wrapper {
-    background: #BC2A87;
+    background: #1B4F72;
 }
 
 .footer_bottom {
@@ -1521,10 +1521,10 @@ transition: all .3s;
 }
 
 #filters ul li a:hover h5, #filters ul li a.active h5 {
-    background: #BC2A87;
+    background: #1B4F72;
     color: #FEE16F;
     text-decoration: none;
-    border: #BC2A87 solid 1px;
+    border: #1B4F72 solid 1px;
 }
 
 .section-title h2 {
