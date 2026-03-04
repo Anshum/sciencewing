@@ -990,6 +990,185 @@ body {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE / MOBILE  (injected)
+   Breakpoints:
+     ≤ 900px  → tablet
+     ≤ 600px  → phone
+══════════════════════════════════════════════════════ */
+
+/* ── Shared section padding ───────────────────────── */
+@media (max-width: 900px) {
+  .section        { padding: 56px 28px; }
+  .memory-section { padding: 56px 28px; }
+  .reactivity-section { padding: 56px 28px; }
+}
+@media (max-width: 600px) {
+  .section        { padding: 40px 16px; }
+  .memory-section { padding: 40px 16px; }
+  .reactivity-section { padding: 40px 16px; }
+  .section-heading { margin-bottom: 28px; }
+}
+
+/* ── COVER ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cover {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .cover-right { display: none; }   /* hide radial diagram on small screens */
+  .cover-left  { padding: 60px 32px 56px; }
+  .cover-title { font-size: clamp(40px, 10vw, 68px); letter-spacing: -1px; }
+  .cover-subtitle { font-size: clamp(16px, 4vw, 22px); }
+  .cover-meta  { gap: 24px; }
+  .meta-num    { font-size: 32px; }
+}
+@media (max-width: 600px) {
+  .cover-left  { padding: 44px 20px 44px; }
+  .cover-meta  { flex-wrap: wrap; gap: 16px 28px; }
+}
+
+/* ── REACTION TYPES GRID ──────────────────────────── */
+@media (max-width: 900px) {
+  .rxn-grid        { grid-template-columns: 1fr 1fr; }
+  .rxn-grid-bottom { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .rxn-grid        { grid-template-columns: 1fr; }
+  .rxn-grid-bottom { grid-template-columns: 1fr; }
+  .rxn-card        { padding: 24px 20px; }
+  .rxn-number      { font-size: 52px; }
+  .rxn-name        { font-size: 20px; }
+  /* inner 2-col grids inside rxn cards → 1 col */
+  .rxn-card [style*="grid-template-columns: 1fr 1fr"] {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+/* ── ENERGY SPLIT ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .energy-split { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ── REDOX HERO ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .redox-hero    { padding: 36px 28px; border-radius: 14px; }
+  .redox-columns { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .redox-eq-row  { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .letter-big    { font-size: 48px; }
+  .oil-rig-sep   { font-size: 48px; padding: 0 4px; }
+}
+@media (max-width: 600px) {
+  .redox-hero    { padding: 28px 18px; }
+  .redox-acronym { flex-wrap: wrap; gap: 8px; }
+  .oil-rig-block { gap: 0; }
+  .letter-big    { font-size: 38px; }
+  .oil-rig-sep   { font-size: 38px; }
+  .redox-columns { grid-template-columns: 1fr; }
+  .redox-eq-row  { grid-template-columns: 1fr; }
+  .redox-col     { padding: 16px; }
+}
+
+/* ── CORROSION / RANCIDITY ────────────────────────── */
+@media (max-width: 900px) {
+  .effects-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 600px) {
+  .effect-head  { padding: 20px 20px 16px; }
+  .effect-body  { padding: 18px 20px; }
+  .prevent-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── OBSERVATIONS GRID ────────────────────────────── */
+@media (max-width: 900px) {
+  .obs-grid { grid-template-columns: 1fr 1fr; }
+  .section.obs-section { padding: 56px 28px; }
+}
+@media (max-width: 600px) {
+  .obs-grid { grid-template-columns: 1fr; }
+  .section.obs-section { padding: 40px 16px; }
+}
+
+/* ── COLOUR GRID ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .colour-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .colour-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .colour-card { padding: 14px 14px; }
+  .colour-swatch { width: 40px; height: 40px; }
+  .colour-name   { font-size: 15px; }
+}
+
+/* ── REACTIVITY SERIES ────────────────────────────── */
+@media (max-width: 900px) {
+  .reactivity-bar { padding: 32px 24px; border-radius: 14px; }
+  .react-metals   { flex-wrap: wrap; gap: 4px; justify-content: center; }
+  .react-metal    { flex: 0 0 calc(16.6% - 4px); min-width: 52px; }
+  .react-metal::after { display: none; }   /* hide arrows */
+  .react-bar-fill { display: none; }       /* hide bars */
+  .react-symbol   { font-size: 20px; }
+  .react-name     { font-size: 6px; }
+  .react-note     { flex-direction: column; gap: 4px; font-size: 8px; }
+}
+@media (max-width: 600px) {
+  .react-metal  { flex: 0 0 calc(25% - 4px); }
+  .react-symbol { font-size: 18px; }
+  .react-title  { font-size: 16px; margin-bottom: 18px; }
+}
+
+/* ── MEMORY GRID ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .memory-grid { grid-template-columns: repeat(2, 1fr); }
+  .memory-trick { font-size: 22px; }
+}
+@media (max-width: 600px) {
+  .memory-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .memory-card { padding: 16px 14px; }
+  .memory-trick { font-size: 18px; }
+  .memory-desc  { font-size: 11px; }
+}
+
+/* ── FOOTER ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    padding: 28px 24px;
+  }
+}
+@media (max-width: 600px) {
+  .footer { padding: 24px 16px; }
+  .footer-brand { font-size: 15px; }
+}
+
+/* ── Equation blocks: prevent horizontal overflow ── */
+.eq-main, .eq-block, .effect-eq, .energy-eq,
+.redox-eq-formula, .fline {
+  overflow-x: auto;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* ── Generic inline 2-col grids inside cards ──────── */
+@media (max-width: 600px) {
+  [style*="display:grid"][style*="grid-template-columns:1fr 1fr"],
+  [style*="display: grid"][style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Touch tap targets ────────────────────────────── */
+@media (max-width: 900px) {
+  .rxn-card:hover,
+  .memory-card:hover,
+  .colour-card:hover,
+  .obs-card:hover { transform: none; }
+}
+
 </style>
 </head>
 <body>
