@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemical Reactions & Equations — Infographic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0a0f1e;
+  --paper:  #fafbff;
+  --rule:   #dde4f0;
+  --sky:    #0ea5e9;
+  --sky-d:  #0369a1;
+  --sky-l:  #e0f2fe;
+  --teal:   #0891b2;
+  --teal-l: #ecfeff;
+  --violet: #7c3aed;
+  --viol-l: #f5f3ff;
+  --indigo: #4338ca;
+  --ind-l:  #eef2ff;
+  --cobalt: #1d4ed8;
+  --cob-l:  #dbeafe;
+  --slate:  #334155;
+  --muted:  #64748b;
+  --faint:  #f1f5f9;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ══ COVER ══════════════════════════════════════════ */
+.cover {
+  background: var(--ink);
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,165,233,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.cover-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.2) 0%, transparent 70%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+.cover-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+  bottom: -100px; left: 200px;
+  pointer-events: none;
+}
+
+.cover-left {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cover-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--sky);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cover-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 2px;
+  background: var(--sky);
+}
+
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 6vw, 88px);
+  font-weight: 900;
+  line-height: 0.95;
+  color: #fff;
+  letter-spacing: -2px;
+  margin-bottom: 12px;
+}
+.cover-title em {
+  font-style: italic;
+  color: var(--sky);
+}
+
+.cover-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 700;
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.meta-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.meta-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--sky);
+  line-height: 1;
+}
+.meta-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+.cover-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 5px 12px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.cover-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  padding: 60px;
+}
+
+/* Radial diagram on cover */
+.radial-wrap {
+  position: relative;
+  width: 420px;
+  height: 420px;
+}
+.radial-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(14,165,233,0.2);
+}
+.radial-ring:nth-child(1) { inset: 0; }
+.radial-ring:nth-child(2) { inset: 50px; border-color: rgba(14,165,233,0.15); }
+.radial-ring:nth-child(3) { inset: 100px; border-color: rgba(14,165,233,0.1); }
+.radial-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #0369a1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px rgba(14,165,233,0.4), 0 0 120px rgba(14,165,233,0.15);
+}
+.radial-center span { font-size: 36px; }
+.radial-center small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.radial-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.rnode-circle {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  border: 2px solid;
+  position: relative;
+}
+.rnode-line {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform-origin: 0 0;
+  height: 1px;
+  opacity: 0.35;
+  z-index: -1;
+}
+.rnode-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  max-width: 70px;
+  line-height: 1.3;
+}
+
+/* ══ SECTION WRAPPER ══════════════════════════════════════ */
+.section { padding: 80px 60px; }
+.section-alt { background: #f8faff; }
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--sky);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before { content:''; display:inline-block; width:24px; height:1.5px; background:var(--sky); }
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--ink);
+  margin-bottom: 48px;
+}
+
+/* ══ REACTION TYPES GRID ══════════════════════════════════ */
+.rxn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--rule);
+  border: 2px solid var(--rule);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+.rxn-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--rule);
+  border: 2px solid var(--rule);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+}
+
+.rxn-card {
+  background: var(--paper);
+  padding: 32px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.rxn-card:hover { transform: scale(1.01); z-index: 2; }
+
+.rxn-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+.rxn-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 0.85;
+  opacity: 0.06;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  letter-spacing: -4px;
+  pointer-events: none;
+}
+
+.rxn-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.rxn-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.rxn-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+
+.rxn-formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.rxn-def {
+  font-size: 12px;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.eq-block {
+  background: var(--faint);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+}
+.eq-main {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.6;
+}
+.eq-note {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-style: italic;
+}
+
+.rxn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-right: 4px;
+  margin-top: 8px;
+}
+
+/* ══ COLOR VARIANTS ══ */
+.c-sky .rxn-card::before, .c-sky .rxn-number { background: var(--sky); color: var(--sky); }
+.c-sky .rxn-type { color: var(--sky); }
+.c-sky .rxn-formula { background: var(--sky-l); color: var(--sky-d); }
+
+.c-violet .rxn-card::before { background: var(--violet); }
+.c-violet .rxn-number { color: var(--violet); }
+.c-violet .rxn-type { color: var(--violet); }
+.c-violet .rxn-formula { background: var(--viol-l); color: var(--violet); }
+
+.c-teal .rxn-card::before { background: var(--teal); }
+.c-teal .rxn-number { color: var(--teal); }
+.c-teal .rxn-type { color: var(--teal); }
+.c-teal .rxn-formula { background: var(--teal-l); color: var(--teal); }
+
+.c-cobalt .rxn-card::before { background: var(--cobalt); }
+.c-cobalt .rxn-number { color: var(--cobalt); }
+.c-cobalt .rxn-type { color: var(--cobalt); }
+.c-cobalt .rxn-formula { background: var(--cob-l); color: var(--cobalt); }
+
+.c-indigo .rxn-card::before { background: var(--indigo); }
+.c-indigo .rxn-number { color: var(--indigo); }
+.c-indigo .rxn-type { color: var(--indigo); }
+.c-indigo .rxn-formula { background: var(--ind-l); color: var(--indigo); }
+
+.c-skydeep .rxn-card::before { background: var(--sky-d); }
+.c-skydeep .rxn-number { color: var(--sky-d); }
+.c-skydeep .rxn-type { color: var(--sky-d); }
+.c-skydeep .rxn-formula { background: var(--sky-l); color: var(--sky-d); }
+
+/* ══ ENERGY SECTION ══════════════════════════════════════ */
+.energy-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.energy-card {
+  border-radius: 16px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.energy-card-exo {
+  background: linear-gradient(135deg, #fff1f0, #ffe4e1);
+  border: 1.5px solid #fecaca;
+}
+.energy-card-endo {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1.5px solid #bfdbfe;
+}
+
+.energy-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.energy-label-exo { color: #dc2626; }
+.energy-label-endo { color: #1d4ed8; }
+
+.energy-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.energy-subtitle-exo { color: #ef4444; }
+.energy-subtitle-endo { color: #3b82f6; }
+
+.energy-list { list-style: none; }
+.energy-list li {
+  font-size: 13px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.energy-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.energy-list-exo li::before { background: #ef4444; }
+.energy-list-endo li::before { background: #3b82f6; }
+.energy-list li:last-child { border-bottom: none; }
+
+.energy-eq {
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  line-height: 1.8;
+}
+.energy-eq-exo { background: rgba(220,38,38,0.06); color: #991b1b; }
+.energy-eq-endo { background: rgba(29,78,216,0.06); color: #1e3a8a; }
+
+.energy-badge {
+  position: absolute;
+  top: 28px; right: 28px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.energy-badge-exo { background: rgba(220,38,38,0.1); }
+.energy-badge-endo { background: rgba(29,78,216,0.1); }
+
+/* ══ REDOX SECTION ════════════════════════════════════════ */
+.redox-hero {
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 56px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.redox-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.redox-glow {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+
+.redox-main {
+  position: relative;
+  z-index: 2;
+}
+
+.redox-acronym {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 36px;
+  align-items: flex-start;
+}
+.oil-rig-block {
+  display: flex;
+  gap: 2px;
+}
+.letter-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.letter-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--sky);
+}
+.letter-word {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  margin-top: 4px;
+  text-align: center;
+}
+.oil-rig-sep {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  line-height: 0.9;
+  color: rgba(255,255,255,0.15);
+  align-self: flex-start;
+  padding: 0 8px;
+}
+
+.redox-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.redox-col {
+  border-radius: 12px;
+  padding: 24px;
+}
+.redox-col-ox { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.2); }
+.redox-col-red { background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.2); }
+
+.redox-col-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.redox-col-ox .redox-col-title { color: #fca5a5; }
+.redox-col-red .redox-col-title { color: #7dd3fc; }
+
+.redox-col ul { list-style: none; }
+.redox-col ul li {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.75);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.redox-col ul li::before { content:'›'; font-size: 16px; color: rgba(255,255,255,0.3); }
+.redox-col ul li:last-child { border-bottom: none; }
+
+.redox-equations { }
+.redox-eq-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.redox-eq {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 16px;
+}
+.redox-eq-formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #e0f2fe;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.redox-eq-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.analysis-ox {
+  font-size: 10px;
+  color: #fca5a5;
+}
+.analysis-red {
+  font-size: 10px;
+  color: #7dd3fc;
+}
+
+/* ══ CORROSION / RANCIDITY ════════════════════════════════ */
+.effects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.effect-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid var(--rule);
+}
+.effect-head {
+  padding: 28px 32px 24px;
+}
+.effect-head-corr { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+.effect-head-ranc { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+
+.effect-icon { font-size: 40px; margin-bottom: 10px; }
+.effect-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.effect-tagline {
+  font-size: 12px;
+  color: var(--slate);
+  margin-top: 4px;
+}
+
+.effect-body {
+  padding: 24px 32px;
+  background: white;
+}
+
+.effect-eq {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  background: var(--faint);
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.prevent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 12px;
+}
+.prevent-item {
+  background: var(--faint);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.prevent-item::before {
+  content: '✓';
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ══ OBSERVATIONS TABLE ════════════════════════════════════ */
+.obs-section { background: var(--ink); color: white; }
+.obs-section .section-heading { color: white; }
+.obs-section .section-label { color: var(--sky); }
+
+.obs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+.obs-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.obs-card:hover { background: rgba(255,255,255,0.07); }
+.obs-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 14px 14px 0 0;
+}
+.obs-experiment {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.obs-observation {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.obs-highlight {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 0;
+}
+.obs-reason {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+}
+
+/* ══ MEMORY SECTION ══════════════════════════════════════════ */
+.memory-section {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 50%, #1d4ed8 100%);
+  color: white;
+  padding: 80px 60px;
+}
+.memory-section .section-label { color: rgba(255,255,255,0.6); }
+.memory-section .section-label::before { background: rgba(255,255,255,0.4); }
+.memory-section .section-heading { color: white; }
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.memory-card {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 24px 20px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s, background 0.2s;
+}
+.memory-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.15);
+}
+.memory-trick {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+.memory-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.memory-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+
+/* ══ COLOUR CHANGES TABLE ════════════════════════════════════ */
+.colour-section { background: #f8faff; }
+.colour-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.colour-card {
+  background: white;
+  border-radius: 14px;
+  border: 1.5px solid var(--rule);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.colour-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14,165,233,0.1);
+}
+.colour-swatch {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid rgba(0,0,0,0.06);
+}
+.colour-substance {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.colour-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+.colour-note {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ══ REACTIVITY SERIES ════════════════════════════════════════ */
+.reactivity-section { padding: 80px 60px; }
+.reactivity-bar {
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 48px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.react-bg {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.react-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 2;
+}
+.react-metals {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+.react-metal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.react-metal::after {
+  content: '›';
+  position: absolute;
+  right: -8px;
+  top: 16px;
+  font-size: 20px;
+  color: rgba(255,255,255,0.2);
+  z-index: 3;
+}
+.react-metal:last-child::after { display: none; }
+.react-symbol {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+}
+.react-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.react-bar-fill {
+  height: 6px;
+  border-radius: 3px;
+  width: 100%;
+}
+.react-note {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+}
+
+/* ══ FOOTER ══════════════════════════════════════════════════ */
+.footer {
+  background: var(--ink);
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+}
+.footer-brand span { color: var(--sky); }
+.footer-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+}
+
+/* ══ ANIMATIONS ══════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(24px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     COVER
+══════════════════════════════════════════════════════════ -->
+<section class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-glow2"></div>
+
+  <div class="cover-left">
+    <div class="cover-eyebrow">Class 10 · Science · Chapter 1</div>
+    <div class="cover-title">Chemical<br><em>Reactions</em><br>&amp; Equations</div>
+    <div class="cover-subtitle">The complete visual guide</div>
+    <div class="cover-meta">
+      <div class="meta-stat">
+        <div class="meta-num">5</div>
+        <div class="meta-label">Reaction Types</div>
+      </div>
+      <div class="meta-stat">
+        <div class="meta-num">20+</div>
+        <div class="meta-label">Key Equations</div>
+      </div>
+      <div class="meta-stat">
+        <div class="meta-num">12</div>
+        <div class="meta-label">Metals Ranked</div>
+      </div>
+    </div>
+    <div class="cover-tags">
+      <div class="tag" style="color:#38bdf8; border-color:rgba(56,189,248,0.3)">Combination</div>
+      <div class="tag" style="color:#a78bfa; border-color:rgba(167,139,250,0.3)">Decomposition</div>
+      <div class="tag" style="color:#34d399; border-color:rgba(52,211,153,0.3)">Displacement</div>
+      <div class="tag" style="color:#60a5fa; border-color:rgba(96,165,250,0.3)">Redox</div>
+      <div class="tag" style="color:#f0abfc; border-color:rgba(240,171,252,0.3)">Corrosion</div>
+    </div>
+  </div>
+
+  <div class="cover-right">
+    <div class="radial-wrap">
+      <!-- Rings -->
+      <div class="radial-ring"></div>
+      <div class="radial-ring"></div>
+      <div class="radial-ring"></div>
+      <!-- Center -->
+      <div class="radial-center">
+        <span>⚗️</span>
+        <small>Chem Rxns</small>
+      </div>
+      <!-- Nodes -->
+      <div class="radial-node" style="left:50%;top:8%">
+        <div class="rnode-circle" style="background:rgba(14,165,233,0.15);border-color:rgba(14,165,233,0.4);color:#38bdf8">🔥</div>
+        <div class="rnode-label">Combination</div>
+      </div>
+      <div class="radial-node" style="left:88%;top:24%">
+        <div class="rnode-circle" style="background:rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.4);color:#a78bfa">⚡</div>
+        <div class="rnode-label">Decomp-<br>osition</div>
+      </div>
+      <div class="radial-node" style="left:95%;top:55%">
+        <div class="rnode-circle" style="background:rgba(8,145,178,0.15);border-color:rgba(8,145,178,0.4);color:#34d399">🔩</div>
+        <div class="rnode-label">Displacement</div>
+      </div>
+      <div class="radial-node" style="left:75%;top:88%">
+        <div class="rnode-circle" style="background:rgba(29,78,216,0.15);border-color:rgba(29,78,216,0.4);color:#60a5fa">💧</div>
+        <div class="rnode-label">Double<br>Displ.</div>
+      </div>
+      <div class="radial-node" style="left:25%;top:88%">
+        <div class="rnode-circle" style="background:rgba(67,56,202,0.15);border-color:rgba(67,56,202,0.4);color:#a5b4fc">⚗️</div>
+        <div class="rnode-label">Redox</div>
+      </div>
+      <div class="radial-node" style="left:5%;top:55%">
+        <div class="rnode-circle" style="background:rgba(14,116,144,0.15);border-color:rgba(14,116,144,0.4);color:#67e8f9">🌡️</div>
+        <div class="rnode-label">Exo / Endo</div>
+      </div>
+      <div class="radial-node" style="left:12%;top:24%">
+        <div class="rnode-circle" style="background:rgba(236,72,153,0.12);border-color:rgba(236,72,153,0.35);color:#f0abfc">🦀</div>
+        <div class="rnode-label">Corrosion<br>Rancidity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     5 REACTION TYPES
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">Core Concepts</div>
+  <div class="section-heading">The Five Reaction Types</div>
+
+  <div class="rxn-grid">
+    <!-- Combination -->
+    <div class="rxn-card c-sky fade-up delay-1">
+      <div class="rxn-number">01</div>
+      <span class="rxn-icon">🔥</span>
+      <div class="rxn-type">Type 01</div>
+      <div class="rxn-name">Combination<br>Reaction</div>
+      <div class="rxn-formula">A + B → AB</div>
+      <div class="rxn-def">Two or more substances combine to form a single new product. Almost always exothermic — energy is released.</div>
+      <div class="eq-block">
+        <div class="eq-main">2Mg(s) + O₂(g) → 2MgO(s) + Heat</div>
+        <div class="eq-note">Brilliant white dazzling flame; white ash MgO</div>
+      </div>
+      <div class="eq-block">
+        <div class="eq-main">CaO(s) + H₂O(l) → Ca(OH)₂(aq) + Heat</div>
+        <div class="eq-note">Quicklime + water → Slaked lime; solution boils</div>
+      </div>
+      <div class="eq-block">
+        <div class="eq-main">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + Energy</div>
+        <div class="eq-note">Respiration — exothermic combination reaction</div>
+      </div>
+      <span class="rxn-pill" style="background:#e0f2fe;color:#0369a1">⚡ Exothermic</span>
+      <span class="rxn-pill" style="background:#f0f9ff;color:#0284c7">Single product</span>
+    </div>
+
+    <!-- Decomposition -->
+    <div class="rxn-card c-violet fade-up delay-2">
+      <div class="rxn-number">02</div>
+      <span class="rxn-icon">⚡</span>
+      <div class="rxn-type">Type 02</div>
+      <div class="rxn-name">Decomposition<br>Reaction</div>
+      <div class="rxn-formula">AB → A + B</div>
+      <div class="rxn-def">A single compound splits into two or more simpler substances. Needs energy input — generally endothermic.</div>
+      <div class="eq-block" style="background:#f5f3ff">
+        <div class="eq-main" style="color:#4c1d95">🔥 CaCO₃ →<sup>Δ</sup> CaO + CO₂</div>
+        <div class="eq-note">Thermal — Limestone → Quicklime</div>
+      </div>
+      <div class="eq-block" style="background:#f5f3ff">
+        <div class="eq-main" style="color:#4c1d95">⚡ 2H₂O → 2H₂ + O₂ (H₂:O₂ = 2:1 vol)</div>
+        <div class="eq-note">Electrolytic — electric current splits water</div>
+      </div>
+      <div class="eq-block" style="background:#f5f3ff">
+        <div class="eq-main" style="color:#4c1d95">☀️ 2AgCl → 2Ag + Cl₂ (turns grey-black)</div>
+        <div class="eq-note">Photolytic — used in B&W Photography</div>
+      </div>
+      <span class="rxn-pill" style="background:#ede9fe;color:#6d28d9">❄️ Endothermic</span>
+      <span class="rxn-pill" style="background:#f5f3ff;color:#7c3aed">3 sub-types</span>
+    </div>
+
+    <!-- Displacement -->
+    <div class="rxn-card c-teal fade-up delay-3">
+      <div class="rxn-number">03</div>
+      <span class="rxn-icon">🔩</span>
+      <div class="rxn-type">Type 03</div>
+      <div class="rxn-name">Displacement<br>Reaction</div>
+      <div class="rxn-formula">A + BC → AC + B</div>
+      <div class="rxn-def">A more reactive element displaces a less reactive one from its compound. Governed by the reactivity series.</div>
+      <div class="eq-block" style="background:#ecfeff">
+        <div class="eq-main" style="color:#155e75">Fe(s) + CuSO₄(aq) → FeSO₄(aq) + Cu(s)</div>
+        <div class="eq-note">Iron nail → brownish; blue solution → dirty green</div>
+      </div>
+      <div class="eq-block" style="background:#ecfeff">
+        <div class="eq-main" style="color:#155e75">Zn(s) + 2HCl(aq) → ZnCl₂(aq) + H₂(g)↑</div>
+        <div class="eq-note">Zinc displaces hydrogen; bubbles visible</div>
+      </div>
+      <div class="eq-block" style="background:#ecfeff">
+        <div class="eq-main" style="color:#155e75">2Al + 3CuCl₂ → 2AlCl₃ + 3Cu</div>
+        <div class="eq-note">Al more reactive than Cu</div>
+      </div>
+      <span class="rxn-pill" style="background:#cffafe;color:#0e7490">Reactivity-driven</span>
+      <span class="rxn-pill" style="background:#ecfeff;color:#0891b2">More → Less reactive</span>
+    </div>
+  </div>
+
+  <div class="rxn-grid-bottom">
+    <!-- Double Displacement -->
+    <div class="rxn-card c-cobalt fade-up delay-4">
+      <div class="rxn-number">04</div>
+      <span class="rxn-icon">💧</span>
+      <div class="rxn-type">Type 04</div>
+      <div class="rxn-name">Double Displacement / Precipitation</div>
+      <div class="rxn-formula">AB + CD → AD + CB</div>
+      <div class="rxn-def">Ions of two compounds exchange to form new compounds. Often produces an insoluble precipitate (↓). All precipitation reactions are double displacement — but not vice versa.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="eq-block" style="background:#dbeafe">
+          <div class="eq-main" style="color:#1e3a8a;font-size:10px">Na₂SO₄ + BaCl₂ → BaSO₄↓ + 2NaCl</div>
+          <div class="eq-note">WHITE precipitate of BaSO₄</div>
+        </div>
+        <div class="eq-block" style="background:#dbeafe">
+          <div class="eq-main" style="color:#1e3a8a;font-size:10px">Pb(NO₃)₂ + 2KI → PbI₂↓ + 2KNO₃</div>
+          <div class="eq-note">YELLOW precipitate of PbI₂</div>
+        </div>
+        <div class="eq-block" style="background:#dbeafe">
+          <div class="eq-main" style="color:#1e3a8a;font-size:10px">AgNO₃ + NaCl → AgCl↓ + NaNO₃</div>
+          <div class="eq-note">WHITE precipitate of AgCl</div>
+        </div>
+        <div class="eq-block" style="background:#dbeafe">
+          <div class="eq-main" style="color:#1e3a8a;font-size:10px">HCl + NaOH → NaCl + H₂O</div>
+          <div class="eq-note">Neutralisation reaction</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Redox -->
+    <div class="rxn-card c-indigo fade-up delay-5">
+      <div class="rxn-number">05</div>
+      <span class="rxn-icon">⚗️</span>
+      <div class="rxn-type">Type 05</div>
+      <div class="rxn-name">Oxidation–Reduction (Redox)</div>
+      <div class="rxn-formula">OIL RIG</div>
+      <div class="rxn-def">Oxidation and reduction always occur simultaneously. The substance oxidised is the reducing agent; the substance reduced is the oxidising agent.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:#fee2e2;border-radius:8px;padding:10px">
+          <div style="font-size:10px;font-weight:800;color:#b91c1c;margin-bottom:6px;letter-spacing:1px">OXIDATION</div>
+          <div style="font-size:11px;color:#7f1d1d;line-height:1.6">Gain of O₂<br>Loss of H₂<br>Loss of e⁻<br>→ <b>Reducing Agent</b></div>
+        </div>
+        <div style="background:#dbeafe;border-radius:8px;padding:10px">
+          <div style="font-size:10px;font-weight:800;color:#1d4ed8;margin-bottom:6px;letter-spacing:1px">REDUCTION</div>
+          <div style="font-size:11px;color:#1e3a8a;line-height:1.6">Loss of O₂<br>Gain of H₂<br>Gain of e⁻<br>→ <b>Oxidising Agent</b></div>
+        </div>
+      </div>
+      <div class="eq-block" style="background:#eef2ff">
+        <div class="eq-main" style="color:#312e81;font-size:10.5px">CuO + H₂ → Cu + H₂O</div>
+        <div style="font-size:10px;color:#b91c1c;margin-top:2px">H₂ oxidised (gains O) → Reducing agent</div>
+        <div style="font-size:10px;color:#1d4ed8">CuO reduced (loses O) → Oxidising agent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     ENERGY — EXOTHERMIC vs ENDOTHERMIC
+══════════════════════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="section-label">Energy in Reactions</div>
+  <div class="section-heading">Exothermic vs Endothermic</div>
+
+  <div class="energy-split">
+    <div class="energy-card energy-card-exo fade-up delay-1">
+      <div class="energy-badge energy-badge-exo">🔥</div>
+      <div class="energy-label energy-label-exo">Exothermic</div>
+      <div class="energy-subtitle energy-subtitle-exo">Energy released · Temperature rises</div>
+      <ul class="energy-list energy-list-exo">
+        <li>Burning / Combustion</li>
+        <li>Respiration (C₆H₁₂O₆ + O₂)</li>
+        <li>CaO + H₂O → Ca(OH)₂</li>
+        <li>All combination reactions</li>
+        <li>Neutralisation reactions</li>
+        <li>Rusting / Corrosion</li>
+      </ul>
+      <div class="energy-eq energy-eq-exo">
+        CH₄ + 2O₂ → CO₂ + 2H₂O + Heat<br>
+        CaO + H₂O → Ca(OH)₂ + Heat<br>
+        C + O₂ → CO₂ + Heat
+      </div>
+    </div>
+
+    <div class="energy-card energy-card-endo fade-up delay-2">
+      <div class="energy-badge energy-badge-endo">❄️</div>
+      <div class="energy-label energy-label-endo">Endothermic</div>
+      <div class="energy-subtitle energy-subtitle-endo">Energy absorbed · Temperature drops</div>
+      <ul class="energy-list energy-list-endo">
+        <li>Decomposition reactions</li>
+        <li>Photosynthesis (6CO₂ + 6H₂O)</li>
+        <li>Electrolysis of water</li>
+        <li>Thermal decomp. of CaCO₃</li>
+        <li>Dissolving NH₄Cl in water</li>
+        <li>Heating lead nitrate Pb(NO₃)₂</li>
+      </ul>
+      <div class="energy-eq energy-eq-endo">
+        6CO₂ + 6H₂O →[Sunlight] C₆H₁₂O₆ + 6O₂<br>
+        CaCO₃ →[Δ] CaO + CO₂<br>
+        2H₂O →[Electric] 2H₂ + O₂
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     REDOX DEEP-DIVE
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-label">Deep Dive</div>
+  <div class="section-heading">Oxidation &amp; Reduction</div>
+
+  <div class="redox-hero">
+    <div class="redox-hero-bg"></div>
+    <div class="redox-glow"></div>
+    <div class="redox-main">
+
+      <div class="redox-acronym">
+        <div class="oil-rig-block">
+          <div class="letter-box"><div class="letter-big">O</div><div class="letter-word">Oxidation</div></div>
+          <div class="letter-box"><div class="letter-big">I</div><div class="letter-word">Is</div></div>
+          <div class="letter-box"><div class="letter-big">L</div><div class="letter-word">Loss</div></div>
+        </div>
+        <div class="oil-rig-sep">·</div>
+        <div class="oil-rig-block">
+          <div class="letter-box"><div class="letter-big">R</div><div class="letter-word">Reduction</div></div>
+          <div class="letter-box"><div class="letter-big">I</div><div class="letter-word">Is</div></div>
+          <div class="letter-box"><div class="letter-big">G</div><div class="letter-word">Gain</div></div>
+        </div>
+        <div style="margin-left:20px;align-self:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);line-height:2">of electrons (e⁻)</div>
+        </div>
+      </div>
+
+      <div class="redox-columns">
+        <div class="redox-col redox-col-ox">
+          <div class="redox-col-title">Oxidation</div>
+          <ul>
+            <li>Gain of Oxygen</li>
+            <li>Loss of Hydrogen</li>
+            <li>Loss of electrons (OIL)</li>
+            <li>Oxidation state increases ↑</li>
+            <li>Substance = <b>Reducing Agent</b></li>
+          </ul>
+        </div>
+        <div class="redox-col redox-col-red">
+          <div class="redox-col-title">Reduction</div>
+          <ul>
+            <li>Loss of Oxygen</li>
+            <li>Gain of Hydrogen</li>
+            <li>Gain of electrons (RIG)</li>
+            <li>Oxidation state decreases ↓</li>
+            <li>Substance = <b>Oxidising Agent</b></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="redox-equations">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:16px">Key Equations with Analysis</div>
+        <div class="redox-eq-row">
+          <div class="redox-eq">
+            <div class="redox-eq-formula">CuO + H₂ → Cu + H₂O</div>
+            <div class="redox-eq-analysis">
+              <div class="analysis-ox">🔴 H₂ gains O → OXIDISED → Reducing Agent</div>
+              <div class="analysis-red">🔵 CuO loses O → REDUCED → Oxidising Agent</div>
+            </div>
+          </div>
+          <div class="redox-eq">
+            <div class="redox-eq-formula">ZnO + C → Zn + CO</div>
+            <div class="redox-eq-analysis">
+              <div class="analysis-ox">🔴 C oxidised (gains O) → Reducing Agent</div>
+              <div class="analysis-red">🔵 ZnO reduced (loses O) → Oxidising Agent</div>
+            </div>
+          </div>
+          <div class="redox-eq">
+            <div class="redox-eq-formula">MnO₂ + 4HCl → MnCl₂ + 2H₂O + Cl₂</div>
+            <div class="redox-eq-analysis">
+              <div class="analysis-ox">🔴 HCl oxidised (H lost) → Reducing Agent</div>
+              <div class="analysis-red">🔵 MnO₂ reduced → Oxidising Agent</div>
+            </div>
+          </div>
+          <div class="redox-eq">
+            <div class="redox-eq-formula">Fe₂O₃ + 3CO → 2Fe + 3CO₂</div>
+            <div class="redox-eq-analysis">
+              <div class="analysis-ox">🔴 CO oxidised → gains O → Reducing Agent</div>
+              <div class="analysis-red">🔵 Fe₂O₃ reduced → loses O → Oxidising Agent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CORROSION & RANCIDITY
+══════════════════════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="section-label">Effects of Oxidation</div>
+  <div class="section-heading">Corrosion &amp; Rancidity</div>
+
+  <div class="effects-grid">
+    <div class="effect-card fade-up delay-1">
+      <div class="effect-head effect-head-corr">
+        <div class="effect-icon">🦠</div>
+        <div class="effect-title">Corrosion</div>
+        <div class="effect-tagline">Slow eating away of metals by air, moisture &amp; chemicals</div>
+      </div>
+      <div class="effect-body">
+        <div class="effect-eq">4Fe(s) + 3O₂(g) + xH₂O(l) → 2Fe₂O₃·xH₂O<br><span style="color:#92400e;font-size:9.5px">Rust = Hydrated Iron(III) Oxide — REDDISH BROWN colour</span></div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px">Other Examples:</div>
+        <ul style="list-style:none;font-size:12px;color:var(--slate);line-height:2">
+          <li>• Silver → Ag + H₂S → Ag₂S (black tarnish)</li>
+          <li>• Copper → green copper carbonate coating</li>
+          <li>• Iron needs BOTH O₂ AND H₂O to rust</li>
+        </ul>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin:14px 0 8px">Prevention Methods:</div>
+        <div class="prevent-grid">
+          <div class="prevent-item">Painting / Oil coating</div>
+          <div class="prevent-item">Galvanisation (Zinc)</div>
+          <div class="prevent-item">Electroplating (Cr, Ni)</div>
+          <div class="prevent-item">Alloying (Stainless steel)</div>
+          <div class="prevent-item">Tinning (Tin coating)</div>
+          <div class="prevent-item">Grease / Coating</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="effect-card fade-up delay-2">
+      <div class="effect-head effect-head-ranc">
+        <div class="effect-icon">🧈</div>
+        <div class="effect-title">Rancidity</div>
+        <div class="effect-tagline">Oxidation of fats &amp; oils in food → bad smell, taste, toxic products</div>
+      </div>
+      <div class="effect-body">
+        <div class="effect-eq">Fats/Oils + O₂ → Oxidised products (rancid)<br><span style="color:#065f46;font-size:9.5px">Called Oxidative Rancidity — UV light &amp; heat accelerates the process</span></div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px">Causes:</div>
+        <ul style="list-style:none;font-size:12px;color:var(--slate);line-height:2">
+          <li>• Atmospheric O₂ attacks unsaturated fats</li>
+          <li>• UV light and heat speed up oxidation</li>
+          <li>• Results in bad smell and bitter taste</li>
+        </ul>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin:14px 0 8px">Prevention Methods:</div>
+        <div class="prevent-grid">
+          <div class="prevent-item">Antioxidants (BHA)</div>
+          <div class="prevent-item" style="font-weight:700;background:#d1fae5;color:#065f46">N₂ flushing ★</div>
+          <div class="prevent-item">Airtight containers</div>
+          <div class="prevent-item">Refrigeration</div>
+          <div class="prevent-item">Vacuum packing</div>
+          <div class="prevent-item">Away from light</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     EXPERIMENTAL OBSERVATIONS
+══════════════════════════════════════════════════════════ -->
+<section class="section obs-section">
+  <div class="section-label">Laboratory</div>
+  <div class="section-heading">Key Experimental Observations</div>
+
+  <div class="obs-grid">
+    <div class="obs-card" style="border-top-color:#0284c7">
+      <div class="obs-experiment">Iron nail in CuSO₄ solution</div>
+      <div class="obs-observation">Iron nail turns <span style="color:#fb923c;font-weight:600">brownish</span>; blue CuSO₄ solution turns <span style="color:#4ade80;font-weight:600">dirty green</span></div>
+      <div class="obs-reason">Cu deposits on Fe; CuSO₄ → FeSO₄ (displacement)</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#7c3aed">
+      <div class="obs-experiment">Burning Mg ribbon</div>
+      <div class="obs-observation"><span style="color:#fde68a;font-weight:600">Brilliant white dazzling flame</span>; white powder MgO formed</div>
+      <div class="obs-reason">Mg + O₂ → MgO (combination, exothermic)</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#0891b2">
+      <div class="obs-experiment">Heating FeSO₄</div>
+      <div class="obs-observation"><span style="color:#4ade80;font-weight:600">Green</span> FeSO₄ → <span style="color:#fb923c;font-weight:600">Red-brown</span> Fe₂O₃; smell of burning sulphur</div>
+      <div class="obs-reason">Thermal decomp: 2FeSO₄ → Fe₂O₃ + SO₂ + SO₃</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#1d4ed8">
+      <div class="obs-experiment">Heating Lead Nitrate Pb(NO₃)₂</div>
+      <div class="obs-observation"><span style="color:#fb923c;font-weight:600">Brown fumes</span> of NO₂ evolved; yellow PbO residue</div>
+      <div class="obs-reason">2Pb(NO₃)₂ → 2PbO + 4NO₂ + O₂ (thermal decomp)</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#4338ca">
+      <div class="obs-experiment">AgCl in sunlight</div>
+      <div class="obs-observation">White AgCl turns <span style="color:#9ca3af;font-weight:600">grey-black</span></div>
+      <div class="obs-reason">Photolytic decomp: 2AgCl → 2Ag + Cl₂. Basis of B&W Photography</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#0e7490">
+      <div class="obs-experiment">Electrolysis of Water</div>
+      <div class="obs-observation">Gas at both electrodes; <span style="color:#38bdf8;font-weight:600">H₂ exactly double</span> the volume of O₂</div>
+      <div class="obs-reason">2H₂O → 2H₂ + O₂; ratio 2:1; H₂ at cathode, O₂ at anode</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#0284c7">
+      <div class="obs-experiment">CaO + Water</div>
+      <div class="obs-observation">Hissing sound; <span style="color:#fca5a5;font-weight:600">very hot</span>; steam evolved; solution almost boils</div>
+      <div class="obs-reason">CaO + H₂O → Ca(OH)₂ + Heat (highly exothermic)</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#1d4ed8">
+      <div class="obs-experiment">Na₂SO₄ + BaCl₂</div>
+      <div class="obs-observation">Immediate <span style="color:#e2e8f0;font-weight:600;border:1px solid rgba(255,255,255,0.2);padding:1px 5px;border-radius:3px">white precipitate</span> forms</div>
+      <div class="obs-reason">BaSO₄ insoluble white precipitate (double displacement)</div>
+    </div>
+    <div class="obs-card" style="border-top-color:#7c3aed">
+      <div class="obs-experiment">Zn + HCl</div>
+      <div class="obs-observation">Bubbles form; gas evolved at zinc surface; zinc dissolves</div>
+      <div class="obs-reason">Zn + 2HCl → ZnCl₂ + H₂↑ (displacement reaction)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     COLOUR CHANGES
+══════════════════════════════════════════════════════════ -->
+<section class="section colour-section">
+  <div class="section-label">Visual Chemistry</div>
+  <div class="section-heading">Colour Changes to Remember</div>
+
+  <div class="colour-grid">
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#4ade80,#16a34a)"></div>
+      <div>
+        <div class="colour-substance">FeSO₄</div>
+        <div class="colour-name" style="color:#15803d">Green</div>
+        <div class="colour-note">Ferrous sulphate solution</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#fb923c,#c2410c)"></div>
+      <div>
+        <div class="colour-substance">Fe₂O₃ / Rust</div>
+        <div class="colour-name" style="color:#c2410c">Red-Brown</div>
+        <div class="colour-note">Ferric oxide; after heating FeSO₄</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#60a5fa,#1d4ed8)"></div>
+      <div>
+        <div class="colour-substance">CuSO₄</div>
+        <div class="colour-name" style="color:#1d4ed8">Blue</div>
+        <div class="colour-note">Copper sulphate solution</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#9ca3af,#374151)"></div>
+      <div>
+        <div class="colour-substance">AgCl + Sunlight</div>
+        <div class="colour-name" style="color:#374151">Grey-Black</div>
+        <div class="colour-note">Silver chloride after photolysis</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#fde047,#a16207)"></div>
+      <div>
+        <div class="colour-substance">PbI₂</div>
+        <div class="colour-name" style="color:#a16207">Yellow</div>
+        <div class="colour-note">Lead iodide precipitate</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#f8fafc,#e2e8f0);border:1.5px solid #cbd5e1"></div>
+      <div>
+        <div class="colour-substance">BaSO₄ / AgCl ppt</div>
+        <div class="colour-name" style="color:#475569">White</div>
+        <div class="colour-note">Insoluble precipitate formed</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#fb923c,#92400e)"></div>
+      <div>
+        <div class="colour-substance">NO₂ gas</div>
+        <div class="colour-name" style="color:#92400e">Brown Fumes</div>
+        <div class="colour-note">Nitrogen dioxide; from Pb(NO₃)₂</div>
+      </div>
+    </div>
+    <div class="colour-card">
+      <div class="colour-swatch" style="background:linear-gradient(135deg,#fef9c3,#fde047)"></div>
+      <div>
+        <div class="colour-substance">Mg burning</div>
+        <div class="colour-name" style="color:#ca8a04">White Dazzle</div>
+        <div class="colour-note">Brilliant white dazzling flame</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     REACTIVITY SERIES
+══════════════════════════════════════════════════════════ -->
+<section class="reactivity-section">
+  <div class="section-label">Electrochemistry</div>
+  <div class="section-heading">The Reactivity Series</div>
+
+  <div class="reactivity-bar">
+    <div class="react-bg"></div>
+    <div class="react-title">Metals ranked by reactivity — more reactive displaces less reactive</div>
+    <div class="react-metals">
+      <div class="react-metal">
+        <div class="react-symbol">K</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#ef4444,#dc2626)"></div>
+        <div class="react-name">Potassium</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Na</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#f97316,#ea580c)"></div>
+        <div class="react-name">Sodium</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Ca</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#f59e0b,#d97706)"></div>
+        <div class="react-name">Calcium</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Mg</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#eab308,#ca8a04)"></div>
+        <div class="react-name">Magnesium</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Al</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#84cc16,#65a30d)"></div>
+        <div class="react-name">Aluminium</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Zn</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#22c55e,#16a34a)"></div>
+        <div class="react-name">Zinc</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Fe</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#06b6d4,#0891b2)"></div>
+        <div class="react-name">Iron</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Pb</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#0ea5e9,#0284c7)"></div>
+        <div class="react-name">Lead</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol" style="color:#fde047">H</div>
+        <div class="react-bar-fill" style="background:rgba(255,255,255,0.15);border:1px dashed rgba(255,255,255,0.2)"></div>
+        <div class="react-name" style="color:#fde047">Hydrogen</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Cu</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#3b82f6,#1d4ed8)"></div>
+        <div class="react-name">Copper</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Ag</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#6366f1,#4338ca)"></div>
+        <div class="react-name">Silver</div>
+      </div>
+      <div class="react-metal">
+        <div class="react-symbol">Au</div>
+        <div class="react-bar-fill" style="background:linear-gradient(90deg,#8b5cf6,#7c3aed)"></div>
+        <div class="react-name">Gold</div>
+      </div>
+    </div>
+    <div class="react-note">
+      <span>← MORE REACTIVE (displaces metals below)</span>
+      <span>LESS REACTIVE → (gets displaced by metals above)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     MEMORY TRICKS
+══════════════════════════════════════════════════════════ -->
+<section class="memory-section">
+  <div class="section-label">Quick Recall</div>
+  <div class="section-heading">Memory Tricks &amp; Exam Tips</div>
+
+  <div class="memory-grid">
+    <div class="memory-card">
+      <div class="memory-label">Redox Mnemonic</div>
+      <div class="memory-trick">OIL RIG</div>
+      <div class="memory-desc">Oxidation Is Loss · Reduction Is Gain of electrons. Both always happen simultaneously.</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">5 Reaction Types</div>
+      <div class="memory-trick">CD²R</div>
+      <div class="memory-desc">Combination · Decomposition · Displacement · Double Displacement · Redox</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">Energy Rule</div>
+      <div class="memory-trick">Combo = Exo</div>
+      <div class="memory-desc">Combination → Exothermic. Decomposition → Endothermic (generally). Respiration = Combination.</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">Electrolysis</div>
+      <div class="memory-trick">H₂ : O₂ = 2:1</div>
+      <div class="memory-desc">Hydrogen is always DOUBLE the volume of oxygen when water is electrolysed.</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">Photography</div>
+      <div class="memory-trick">AgCl + ☀️</div>
+      <div class="memory-desc">Silver chloride turns grey-black in sunlight. Basis of Black &amp; White Photography.</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">Rancidity</div>
+      <div class="memory-trick">N₂ in Chips 🥔</div>
+      <div class="memory-desc">Chips packets are flushed with Nitrogen gas (not air) to prevent rancidity.</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">Corrosion Rule</div>
+      <div class="memory-trick">O₂ + H₂O = Rust</div>
+      <div class="memory-desc">Iron rusts ONLY when BOTH oxygen AND water are present together. One alone won't work.</div>
+    </div>
+    <div class="memory-card">
+      <div class="memory-label">Precipitation</div>
+      <div class="memory-trick">Ppt ⊂ Double</div>
+      <div class="memory-desc">All precipitation reactions ARE double displacement. Not all double displacement are precipitation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">Chemical <span>Reactions</span> &amp; Equations</div>
+  <div class="footer-note">Class 10 · Science · Chapter 1 · Complete Infographic</div>
+  <div class="footer-note">5 Reaction Types · 20+ Equations · All Observations</div>
+</footer>
+
+</body>
+</html>
