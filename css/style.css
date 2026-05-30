@@ -2605,6 +2605,45 @@ section#experience {
 }
 
 
-
+#stats-bar {
+  background: linear-gradient(90deg, #1a1a4e 0%, #0a0a2e 100%);
+  padding: 30px 0;
+  border-top: 2px solid rgba(255,221,129,0.3);
+  border-bottom: 2px solid rgba(255,221,129,0.3);
+}
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.stat-item {
+  text-align: center;
+  padding: 10px 20px;
+}
+.stat-number {
+  font-size: 42px;
+  font-weight: 800;
+  color: #FFDD81;
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 13px;
+  color: #ccc;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+  display: block;
+}
+.stat-divider {
+  width: 1px;
+  height: 50px;
+  background: rgba(255,221,129,0.2);
+}
+@media (max-width: 600px) {
+  .stat-divider { display: none; }
+  .stat-number { font-size: 32px; }
+}
 
 
