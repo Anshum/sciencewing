@@ -433,7 +433,93 @@
   </div>
 </section>
 
-	
+<section id="faq">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+    <p class="faq-subtitle">Everything parents and students ask before joining Science Wing</p>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Where is Science Wing Coaching Institute located?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        We are located at A-91 Nanhey Park, Bindapur Matiala Road, Uttam Nagar, New Delhi — 110059. Easily accessible from Uttam Nagar East and Uttam Nagar West Metro Stations.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Which courses are offered at Science Wing?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        We offer coaching for NEET, IIT-JEE, CUET, and CBSE Board for Classes VI to XII. Foundation courses for Classes VI-VIII and Olympiad preparation are also available.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Who are the teachers at Science Wing?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        Our faculty includes PhD Scholars from IISER, Masters degree holders in STEM fields, and CSIR-NET & GATE qualified teachers with 18+ years of combined teaching experience.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Does Science Wing offer online or hybrid classes?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        Yes. We offer hybrid classes — students can attend offline at our Uttam Nagar centre or join live online sessions from anywhere. Recorded lectures are also available for revision.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What is the batch size at Science Wing?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        We maintain small batch sizes to ensure every student gets personal attention from the faculty. This is one of our key differences from large coaching chains.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How many hours of study does Science Wing provide daily?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        Each student gets 4-5 hours of structured daily practice sessions including teaching, assignments, doubt clearing and mock test practice.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What facilities are available at Science Wing?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        We have smart classrooms with digital boards and projectors, a well-stocked library with NCERT and reference books, science experiment setups, virtual simulations, and regular mock tests with performance tracking.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How can I get admission in Science Wing for 2026-27?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">
+        Admissions are open for the 2026-27 session. Call or WhatsApp us at 7838314099 or 9711559207, email sciencewingedu@gmail.com, or visit us at A-91 Nanhey Park, Uttam Nagar, New Delhi.
+      </div>
+    </div>
+
+  </div>
+</section>	
 <!--Footer-->
 <footer class="footer_wrapper" id="contact">
   <div class="container">
@@ -661,5 +747,21 @@
   </svg>
   Call Now
 </a>	
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    });
+  });
+</script>
+	
 </body>
 </html>
