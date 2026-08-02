@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b63ce" />
+<title>SN1 · SN2 · E1 · E2 — The Substrate | Science Wing</title>
+<style>
+  :root {
+    --bg: #06131f;
+    --bg-soft: #0b1d2d;
+    --panel: rgba(12, 33, 50, .78);
+    --panel-solid: #10283b;
+    --text: #f5fbff;
+    --muted: #a9bfd0;
+    --line: rgba(255,255,255,.11);
+    --cyan: #33d6c8;
+    --cyan-2: #8bf5e8;
+    --amber: #ffc857;
+    --coral: #ff7b72;
+    --violet: #b69cff;
+    --green: #66e3a4;
+    --shadow: 0 22px 70px rgba(0,0,0,.34);
+    --radius: 24px;
+  }
+  [data-theme="light"] {
+    --bg: #eef7f8;
+    --bg-soft: #dceff1;
+    --panel: rgba(255,255,255,.82);
+    --panel-solid: #ffffff;
+    --text: #10212c;
+    --muted: #536b79;
+    --line: rgba(7, 38, 50, .12);
+    --shadow: 0 22px 70px rgba(20,70,80,.14);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--text);
+    background:
+      radial-gradient(circle at 15% 5%, rgba(51,214,200,.16), transparent 26rem),
+      radial-gradient(circle at 95% 14%, rgba(182,156,255,.13), transparent 25rem),
+      linear-gradient(160deg, var(--bg), var(--bg-soft));
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .32;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent 72%);
+    z-index: -1;
+  }
+  button, input { font: inherit; }
+  button { color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  .container { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(20px);
+    background: color-mix(in srgb, var(--bg) 76%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner { min-height: 68px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .brand { display:flex; align-items:center; gap:12px; min-width:0; }
+  .brand-mark {
+    width: 42px; height:42px; border-radius: 14px;
+    display:grid; place-items:center; font-weight:900; color:#03262a;
+    background: linear-gradient(135deg, var(--cyan-2), var(--amber));
+    box-shadow: 0 8px 30px rgba(51,214,200,.25);
+  }
+  .brand-copy strong { display:block; letter-spacing:.01em; }
+  .brand-copy span { color:var(--muted); font-size:.76rem; }
+  .nav { display:flex; gap:5px; align-items:center; }
+  .nav a, .icon-btn {
+    border:1px solid transparent; background:transparent; border-radius: 12px; padding:10px 12px;
+    font-weight:750; font-size:.86rem; cursor:pointer;
+  }
+  .nav a:hover, .icon-btn:hover { background:var(--panel); border-color:var(--line); }
+  .icon-btn { border-color:var(--line); min-width:42px; }
+  .hero { padding: 76px 0 52px; position:relative; }
+  .hero-grid { display:grid; grid-template-columns: 1.18fr .82fr; gap: 36px; align-items:center; }
+  .eyebrow { display:inline-flex; gap:9px; align-items:center; color:var(--cyan-2); font-weight:850; letter-spacing:.13em; text-transform:uppercase; font-size:.78rem; }
+  .eyebrow::before { content:""; width:30px; height:2px; background:currentColor; border-radius:99px; }
+  h1 { margin:.55rem 0 1rem; font-size: clamp(3.1rem, 7vw, 6.65rem); line-height:.87; letter-spacing:-.065em; }
+  h1 .slash { color:var(--muted); font-weight:300; }
+  h1 .accent { color:var(--cyan-2); }
+  .hero h2 { margin:0 0 1rem; font-size:clamp(1.45rem, 3vw, 2.35rem); letter-spacing:-.035em; }
+  .hero p { color:var(--muted); font-size:1.08rem; line-height:1.75; max-width:690px; }
+  .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+  .btn {
+    border:1px solid var(--line); border-radius:14px; padding:13px 17px; font-weight:850; cursor:pointer;
+    background:var(--panel); box-shadow: 0 8px 24px rgba(0,0,0,.08); transition:.2s ease;
+  }
+  .btn:hover { transform:translateY(-2px); border-color:rgba(139,245,232,.5); }
+  .btn.primary { color:#022b30; border:0; background:linear-gradient(135deg, var(--cyan-2), var(--cyan)); }
+  .btn.amber { color:#312000; border:0; background:linear-gradient(135deg, #ffe29a, var(--amber)); }
+  .hero-visual {
+    min-height: 425px; position:relative; display:grid; place-items:center; isolation:isolate;
+  }
+  .orb {
+    width:min(380px, 82vw); aspect-ratio:1; border-radius:50%; position:relative;
+    background: radial-gradient(circle at 35% 28%, rgba(255,255,255,.25), transparent 20%), linear-gradient(145deg, rgba(51,214,200,.25), rgba(182,156,255,.16));
+    border:1px solid rgba(255,255,255,.18); box-shadow: inset 0 0 80px rgba(139,245,232,.09), 0 35px 90px rgba(0,0,0,.28);
+    display:grid; place-items:center;
+  }
+  .orb::before, .orb::after { content:""; position:absolute; inset:14%; border:1px dashed rgba(139,245,232,.35); border-radius:50%; animation:spin 22s linear infinite; }
+  .orb::after { inset:27%; border-color:rgba(255,200,87,.45); animation-direction:reverse; animation-duration:15s; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .molecule { position:relative; z-index:2; text-align:center; }
+  .molecule .formula { font-size: clamp(2rem, 5vw, 3.7rem); font-weight:900; letter-spacing:-.05em; }
+  .molecule .caption { color:var(--muted); margin-top:10px; font-weight:700; }
+  .atom { position:absolute; width:58px; height:58px; border-radius:50%; display:grid; place-items:center; font-weight:900; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.22); }
+  .atom.a { top:8%; left:12%; background:linear-gradient(145deg,var(--coral),#b9384f); }
+  .atom.b { top:21%; right:4%; background:linear-gradient(145deg,var(--amber),#d4861b); color:#342100; }
+  .atom.c { bottom:9%; left:18%; background:linear-gradient(145deg,var(--violet),#6551b7); }
+  .atom.d { bottom:17%; right:10%; background:linear-gradient(145deg,var(--cyan-2),#2c9b9c); color:#032b31; }
+  .floating-chip { position:absolute; padding:10px 14px; border-radius:999px; background:var(--panel); border:1px solid var(--line); backdrop-filter:blur(10px); font-weight:850; box-shadow:var(--shadow); }
+  .chip-1 { top:2%; left:50%; transform:translateX(-50%); }
+  .chip-2 { bottom:1%; left:50%; transform:translateX(-50%); }
+  .section { padding: 72px 0; }
+  .section-head { display:flex; justify-content:space-between; gap:24px; align-items:end; margin-bottom:30px; }
+  .kicker { color:var(--cyan-2); text-transform:uppercase; letter-spacing:.14em; font-weight:900; font-size:.76rem; }
+  .section h2 { margin:.4rem 0 0; font-size:clamp(2rem,4vw,3.6rem); letter-spacing:-.05em; line-height:1; }
+  .section-lead { color:var(--muted); max-width:600px; line-height:1.7; }
+  .roadmap { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; counter-reset:road; }
+  .road-card { min-height:180px; padding:22px; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); position:relative; overflow:hidden; }
+  .road-card::before { counter-increment:road; content:"0" counter(road); color:var(--muted); font-size:.76rem; font-weight:900; }
+  .road-card.active { border-color:rgba(51,214,200,.55); background:linear-gradient(160deg, rgba(51,214,200,.19), var(--panel)); }
+  .road-card.active::after { content:"YOU ARE HERE"; position:absolute; top:16px; right:-35px; transform:rotate(38deg); padding:5px 40px; background:var(--cyan); color:#05282d; font-size:.62rem; font-weight:950; }
+  .road-card h3 { margin:34px 0 8px; font-size:1.2rem; }
+  .road-card p { margin:0; color:var(--muted); line-height:1.55; font-size:.92rem; }
+  .classifier-wrap { display:grid; grid-template-columns:.85fr 1.15fr; gap:18px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+  .classifier-controls { padding:25px; }
+  .label { color:var(--muted); font-size:.78rem; font-weight:900; text-transform:uppercase; letter-spacing:.1em; }
+  .substrate-buttons { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:16px; }
+  .substrate-btn { padding:18px; border:1px solid var(--line); background:rgba(255,255,255,.035); border-radius:17px; cursor:pointer; text-align:left; transition:.2s; }
+  .substrate-btn:hover, .substrate-btn.active { transform:translateY(-2px); background:rgba(51,214,200,.14); border-color:rgba(51,214,200,.5); }
+  .substrate-btn strong { display:block; font-size:1.12rem; }
+  .substrate-btn span { color:var(--muted); font-size:.82rem; }
+  .classifier-result { padding:30px; display:flex; flex-direction:column; justify-content:center; min-height:310px; position:relative; overflow:hidden; }
+  .classifier-result::after { content:"C–X"; position:absolute; right:-20px; bottom:-40px; font-weight:950; font-size:9rem; color:rgba(255,255,255,.035); letter-spacing:-.1em; }
+  .result-formula { font-size:clamp(2.1rem,6vw,4.4rem); font-weight:950; color:var(--cyan-2); }
+  .result-title { font-size:1.6rem; font-weight:900; margin-top:12px; }
+  .result-copy { color:var(--muted); line-height:1.7; max-width:670px; }
+  .rule-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .rule-card { padding:24px; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); position:relative; overflow:hidden; }
+  .rule-card .rule-no { font-size:4.8rem; line-height:.8; font-weight:950; color:rgba(255,255,255,.06); position:absolute; top:14px; right:14px; }
+  .rule-card h3 { font-size:1.45rem; margin:24px 0 8px; }
+  .rule-card .headline { font-size:1.08rem; font-weight:900; color:var(--cyan-2); }
+  .rule-card ul { color:var(--muted); line-height:1.62; padding-left:1.1rem; }
+  .exception { margin-top:14px; padding:13px; border-left:3px solid var(--amber); background:rgba(255,200,87,.08); border-radius:0 12px 12px 0; font-size:.9rem; line-height:1.55; }
+  .secondary-table { width:100%; border-collapse:collapse; margin-top:15px; font-size:.9rem; }
+  .secondary-table th, .secondary-table td { padding:11px 10px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  .secondary-table th { color:var(--cyan-2); }
+  .flow-shell { padding:26px; }
+  .flow { display:grid; grid-template-columns:1fr 40px repeat(3,1fr); gap:12px; align-items:stretch; }
+  .flow-node { min-height:125px; border:1px solid var(--line); border-radius:18px; padding:18px; background:rgba(255,255,255,.035); display:flex; flex-direction:column; justify-content:center; }
+  .flow-node strong { font-size:1.08rem; }
+  .flow-node span { color:var(--muted); font-size:.88rem; line-height:1.5; margin-top:6px; }
+  .arrow { display:grid; place-items:center; color:var(--cyan-2); font-size:1.8rem; }
+  .alcohol-note { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .note { padding:18px; border-radius:17px; border:1px solid var(--line); background:rgba(255,255,255,.035); }
+  .note strong { color:var(--amber); }
+  .cheat-wrap { overflow-x:auto; border-radius:var(--radius); }
+  .cheat-table { width:100%; min-width:720px; border-collapse:collapse; background:var(--panel); }
+  .cheat-table th, .cheat-table td { padding:17px; border-bottom:1px solid var(--line); text-align:center; }
+  .cheat-table th:first-child, .cheat-table td:first-child { text-align:left; font-weight:850; }
+  .yes { color:var(--green); font-weight:900; }
+  .no { color:var(--coral); font-weight:900; }
+  .maybe { color:var(--amber); font-weight:900; }
+  .practice { position:relative; }
+  .toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding:15px; background:var(--panel); border:1px solid var(--line); border-radius:18px; margin-bottom:20px; position:sticky; top:82px; z-index:30; backdrop-filter:blur(18px); }
+  .filters { display:flex; gap:7px; flex-wrap:wrap; }
+  .filter-btn { padding:9px 12px; border:1px solid var(--line); border-radius:999px; background:transparent; cursor:pointer; font-size:.82rem; font-weight:800; }
+  .filter-btn.active { background:var(--cyan); color:#05282d; border-color:transparent; }
+  .tools { display:flex; gap:8px; flex-wrap:wrap; }
+  .tool-btn { padding:9px 11px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.04); cursor:pointer; font-weight:800; font-size:.82rem; }
+  .progress-row { display:flex; gap:12px; align-items:center; margin:15px 0 20px; }
+  .progress-track { height:9px; flex:1; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; border:1px solid var(--line); }
+  .progress-fill { height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg,var(--cyan),var(--amber)); transition:.3s; }
+  .progress-text { color:var(--muted); font-size:.86rem; min-width:100px; text-align:right; }
+  .card-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+  .flip-card { perspective:1500px; min-height:500px; }
+  .flip-card.hidden { display:none; }
+  .flip-inner { position:relative; width:100%; height:100%; min-height:500px; transform-style:preserve-3d; transition:transform .68s cubic-bezier(.2,.8,.2,1); }
+  .flip-card.flipped .flip-inner { transform:rotateY(180deg); }
+  .card-face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+  .card-front { padding:24px; background:linear-gradient(160deg, color-mix(in srgb,var(--panel-solid) 92%, transparent), color-mix(in srgb,var(--bg-soft) 88%, transparent)); display:flex; flex-direction:column; }
+  .card-back { padding:26px; transform:rotateY(180deg); background:linear-gradient(145deg, rgba(24,96,93,.98), rgba(17,45,64,.98)); color:#f7ffff; display:flex; flex-direction:column; justify-content:space-between; }
+  [data-theme="light"] .card-back { background:linear-gradient(145deg,#c8fbf1,#dce8ff); color:#10212c; }
+  .card-meta { display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:16px; }
+  .tag { padding:7px 10px; border-radius:999px; background:rgba(51,214,200,.12); border:1px solid rgba(51,214,200,.27); color:var(--cyan-2); font-size:.7rem; font-weight:950; letter-spacing:.08em; }
+  .q-no { color:var(--muted); font-weight:900; font-size:.82rem; }
+  .question { font-size:1.13rem; line-height:1.52; font-weight:800; margin:0 0 18px; }
+  .options { display:grid; gap:9px; }
+  .option { width:100%; display:flex; gap:10px; align-items:flex-start; text-align:left; border:1px solid var(--line); background:rgba(255,255,255,.035); border-radius:14px; padding:11px 12px; cursor:pointer; line-height:1.42; transition:.18s; }
+  .option:hover { border-color:rgba(51,214,200,.5); transform:translateX(2px); }
+  .option.selected { background:rgba(182,156,255,.15); border-color:rgba(182,156,255,.55); }
+  .option-letter { flex:0 0 27px; width:27px; height:27px; border-radius:9px; display:grid; place-items:center; background:rgba(255,255,255,.09); font-weight:950; }
+  .card-actions { margin-top:auto; padding-top:18px; display:flex; gap:9px; }
+  .flip-btn, .present-card-btn { flex:1; border:1px solid var(--line); border-radius:13px; padding:11px; cursor:pointer; font-weight:900; background:rgba(255,255,255,.06); }
+  .flip-btn { background:linear-gradient(135deg,var(--cyan-2),var(--cyan)); color:#04292c; border:0; }
+  .answer-label { color:rgba(255,255,255,.66); font-weight:900; text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; }
+  [data-theme="light"] .answer-label { color:#506675; }
+  .answer-big { font-size:clamp(2.3rem,6vw,4.8rem); font-weight:950; line-height:1; margin:13px 0 18px; color:#fff3bd; letter-spacing:-.06em; }
+  [data-theme="light"] .answer-big { color:#0c5b5b; }
+  .answer-option { font-size:1.1rem; font-weight:850; line-height:1.48; }
+  .explanation { color:rgba(255,255,255,.76); line-height:1.67; margin-top:14px; }
+  [data-theme="light"] .explanation { color:#405968; }
+  .verdict { margin-top:13px; display:none; padding:10px 12px; border-radius:12px; font-weight:850; }
+  .verdict.show { display:block; }
+  .verdict.correct { background:rgba(102,227,164,.16); border:1px solid rgba(102,227,164,.4); }
+  .verdict.incorrect { background:rgba(255,123,114,.14); border:1px solid rgba(255,123,114,.45); }
+  .back-btn { width:100%; border:1px solid rgba(255,255,255,.22); border-radius:13px; background:rgba(255,255,255,.08); color:inherit; padding:12px; cursor:pointer; font-weight:900; }
+  .teacher-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .teacher-tip { padding:22px; border:1px solid var(--line); border-radius:20px; background:var(--panel); }
+  .teacher-tip .num { color:var(--amber); font-weight:950; }
+  .teacher-tip h3 { margin:10px 0 6px; }
+  .teacher-tip p { color:var(--muted); line-height:1.6; margin:0; }
+  footer { padding:45px 0 60px; border-top:1px solid var(--line); color:var(--muted); }
+  .footer-inner { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+  .source-note { font-size:.8rem; max-width:650px; line-height:1.55; }
+  .presentation {
+    position:fixed; inset:0; z-index:100; display:none; background:rgba(2,12,19,.92); backdrop-filter:blur(22px); padding:26px;
+  }
+  .presentation.open { display:grid; grid-template-rows:auto 1fr auto; }
+  .presentation-top { display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .presentation-title { font-weight:950; }
+  .presentation-stage { display:grid; place-items:center; min-height:0; padding:18px 0; }
+  .presentation-card { width:min(920px,95vw); max-height:78vh; overflow:auto; border:1px solid rgba(255,255,255,.17); border-radius:28px; background:linear-gradient(160deg,#102b3f,#0a1d2b); box-shadow:0 40px 120px rgba(0,0,0,.5); padding:clamp(24px,4vw,48px); color:#f6fbff; }
+  .presentation-card .question { font-size:clamp(1.45rem,3vw,2.45rem); }
+  .presentation-card .option { font-size:clamp(.95rem,1.8vw,1.25rem); }
+  .present-answer { display:none; margin-top:26px; padding:22px; border-radius:20px; background:rgba(51,214,200,.12); border:1px solid rgba(51,214,200,.3); }
+  .present-answer.show { display:block; }
+  .present-controls { display:flex; justify-content:center; gap:10px; }
+  .toast { position:fixed; right:22px; bottom:22px; z-index:200; padding:12px 15px; background:var(--panel-solid); border:1px solid var(--line); border-radius:13px; box-shadow:var(--shadow); transform:translateY(130%); transition:.28s; }
+  .toast.show { transform:translateY(0); }
+  @media (max-width: 950px) {
+    .nav a { display:none; }
+    .hero-grid, .classifier-wrap { grid-template-columns:1fr; }
+    .hero-visual { min-height:360px; }
+    .roadmap { grid-template-columns:repeat(2,1fr); }
+    .rule-grid { grid-template-columns:1fr; }
+    .flow { grid-template-columns:1fr; }
+    .arrow { transform:rotate(90deg); min-height:30px; }
+    .card-grid { grid-template-columns:1fr; }
+  }
+  @media (max-width: 650px) {
+    .container { width:min(100% - 20px,1180px); }
+    .brand-copy span { display:none; }
+    .hero { padding-top:50px; }
+    h1 { font-size:3.5rem; }
+    .roadmap, .substrate-buttons, .alcohol-note, .teacher-strip { grid-template-columns:1fr; }
+    .section { padding:54px 0; }
+    .section-head { display:block; }
+    .toolbar { top:70px; }
+    .flip-card, .flip-inner { min-height:570px; }
+    .footer-inner { display:block; }
+  }
+  @media print {
+    .topbar, .hero-actions, .toolbar, .progress-row, .card-actions, .presentation, .toast { display:none !important; }
+    body { background:white; color:#111; }
+    body::before { display:none; }
+    .panel, .road-card, .rule-card, .card-face, .teacher-tip, .cheat-table { box-shadow:none; background:white; border:1px solid #bbb; }
+    .flip-card, .flip-inner { min-height:auto; perspective:none; }
+    .flip-inner { transform:none !important; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .card-face { position:relative; transform:none; min-height:420px; color:#111; }
+    .card-back { background:#eefafa; }
+    .card-grid { grid-template-columns:1fr; }
+  }
+</style>
+
+<style id="science-wing-blue-theme">
+  :root,
+  [data-theme="light"],
+  [data-theme="dark"] {
+    --bg: #ffffff;
+    --bg-soft: #eef6ff;
+    --panel: rgba(255,255,255,.94);
+    --panel-solid: #ffffff;
+    --text: #102a43;
+    --muted: #5b7088;
+    --line: rgba(24, 94, 171, .18);
+    --cyan: #1677e8;
+    --cyan-2: #0b63ce;
+    --amber: #3f8fea;
+    --coral: #d64545;
+    --violet: #4b72d8;
+    --green: #15845d;
+    --shadow: 0 18px 50px rgba(31, 94, 166, .14);
+  }
+  body {
+    background:
+      radial-gradient(circle at 12% 3%, rgba(49, 139, 235, .13), transparent 27rem),
+      radial-gradient(circle at 92% 12%, rgba(111, 181, 255, .12), transparent 24rem),
+      linear-gradient(180deg, #ffffff 0%, #f7fbff 52%, #edf6ff 100%);
+  }
+  body::before {
+    opacity: .42;
+    background-image:
+      linear-gradient(rgba(20, 103, 193, .08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 103, 193, .08) 1px, transparent 1px);
+  }
+  :focus-visible { outline-color: #2f87e5; }
+  .topbar {
+    background: rgba(255,255,255,.88);
+    box-shadow: 0 8px 30px rgba(32, 92, 155, .08);
+  }
+  .brand-mark {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0b63ce, #46a1f8);
+    box-shadow: 0 9px 25px rgba(11, 99, 206, .28);
+  }
+  .nav a:hover, .icon-btn:hover { background:#eef6ff; border-color:rgba(11,99,206,.2); }
+  #themeBtn { display:none; }
+  .eyebrow, .kicker, .result-formula, .rule-card .headline, .secondary-table th, .arrow { color:#0b63ce; }
+  h1 .accent { color:#0b63ce; }
+  .btn { background:#ffffff; box-shadow:0 8px 22px rgba(31,94,166,.1); }
+  .btn:hover { border-color:rgba(11,99,206,.45); }
+  .btn.primary,
+  .btn.amber {
+    color:#ffffff;
+    background:linear-gradient(135deg,#0b63ce,#3d95ec);
+  }
+  .orb {
+    background:
+      radial-gradient(circle at 35% 28%, rgba(255,255,255,.95), transparent 21%),
+      linear-gradient(145deg,#d9ecff,#f5faff);
+    border-color:rgba(11,99,206,.2);
+    box-shadow:inset 0 0 80px rgba(60,145,232,.12),0 28px 70px rgba(31,94,166,.17);
+  }
+  .orb::before { border-color:rgba(11,99,206,.34); }
+  .orb::after { border-color:rgba(61,149,236,.45); }
+  .atom { border-color:rgba(255,255,255,.75); color:#fff; }
+  .atom.a { background:linear-gradient(145deg,#1468c9,#0a4e9d); }
+  .atom.b { background:linear-gradient(145deg,#5aaaf6,#1b76d2); color:#fff; }
+  .atom.c { background:linear-gradient(145deg,#607fe0,#3658bc); }
+  .atom.d { background:linear-gradient(145deg,#26a3ef,#0b63ce); color:#fff; }
+  .floating-chip { background:rgba(255,255,255,.94); }
+  .road-card,
+  .panel,
+  .rule-card,
+  .teacher-tip,
+  .toolbar,
+  .cheat-table { background:rgba(255,255,255,.96); }
+  .road-card.active {
+    border-color:rgba(11,99,206,.48);
+    background:linear-gradient(155deg,#dceeff,#ffffff 75%);
+  }
+  .road-card.active::after { background:#0b63ce; color:#fff; }
+  .substrate-btn,
+  .flow-node,
+  .note,
+  .tool-btn,
+  .option,
+  .flip-btn,
+  .present-card-btn { background:#f7fbff; }
+  .substrate-btn:hover,
+  .substrate-btn.active {
+    background:#e4f1ff;
+    border-color:rgba(11,99,206,.48);
+  }
+  .classifier-result::after,
+  .rule-card .rule-no { color:rgba(11,99,206,.07); }
+  .exception {
+    border-left-color:#1677e8;
+    background:#edf6ff;
+  }
+  .note strong { color:#0b63ce; }
+  .yes { color:#15845d; }
+  .maybe { color:#126bc5; }
+  .filter-btn.active {
+    background:#0b63ce;
+    color:#fff;
+  }
+  .progress-track { background:#e4eef8; }
+  .progress-fill { background:linear-gradient(90deg,#0b63ce,#58adf5); }
+  .card-front {
+    background:linear-gradient(160deg,#ffffff,#f2f8ff);
+  }
+  .card-back,
+  [data-theme="light"] .card-back,
+  [data-theme="dark"] .card-back {
+    background:linear-gradient(145deg,#0a4f9f,#1677e8);
+    color:#ffffff;
+  }
+  .tag {
+    background:#e8f3ff;
+    border-color:rgba(11,99,206,.24);
+    color:#0b63ce;
+  }
+  .option:hover { border-color:rgba(11,99,206,.45); }
+  .option.selected {
+    background:#deedff;
+    border-color:rgba(11,99,206,.55);
+  }
+  .option-letter { background:#e5f1ff; color:#0b63ce; }
+  .flip-btn {
+    color:#fff;
+    background:linear-gradient(135deg,#0b63ce,#3c96ee);
+  }
+  .card-back .answer-label,
+  [data-theme="light"] .answer-label,
+  [data-theme="dark"] .answer-label { color:rgba(255,255,255,.72); }
+  .answer-big,
+  [data-theme="light"] .answer-big,
+  [data-theme="dark"] .answer-big { color:#ffffff; }
+  .card-back .explanation,
+  [data-theme="light"] .explanation,
+  [data-theme="dark"] .explanation { color:rgba(255,255,255,.86); }
+  .back-btn { border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.13); }
+  .presentation { background:rgba(7,42,81,.78); }
+  .presentation-card {
+    background:linear-gradient(160deg,#ffffff,#edf6ff);
+    color:#102a43;
+    border-color:rgba(255,255,255,.7);
+    box-shadow:0 38px 110px rgba(0,44,94,.34);
+  }
+  .presentation-card .option { background:#f5f9ff; }
+  .presentation-card .answer-label { color:#5b7088; }
+  .presentation-card .answer-big { color:#0b63ce; }
+  .presentation-card .explanation { color:#405a73; }
+  .present-answer { background:#e7f3ff; border-color:rgba(11,99,206,.28); }
+  .toast { background:#ffffff; }
+  footer { background:rgba(255,255,255,.48); }
+  @media print {
+    body { background:#fff; }
+    .card-back { background:#eaf4ff !important; color:#102a43 !important; }
+    .card-back .answer-label, .card-back .explanation { color:#405a73 !important; }
+    .card-back .answer-big { color:#0b63ce !important; }
+  }
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="#top" aria-label="Science Wing home">
+      <div class="brand-mark">SW</div>
+      <div class="brand-copy"><strong>Science Wing Coaching Institute</strong><span>Chemistry Teaching Studio</span></div>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#learn">Learn</a><a href="#decision">Decision Flow</a><a href="#practice">Flip Cards</a>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle light and dark theme">☼</button>
+      <button class="icon-btn" id="fullBtn" title="Full screen" aria-label="Enter full screen">⛶</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Mechanism Mastery • Part 1</div>
+      <h1><span class="accent">SN1</span> <span class="slash">/</span> SN2<br>E1 <span class="slash">/</span> E2</h1>
+      <h2>Deciding the mechanism begins with the substrate.</h2>
+      <p>Classify the carbon bearing the leaving group, rule out impossible pathways, and then practise with interactive question cards designed for live classroom teaching.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#learn">Start Teaching</a>
+        <a class="btn amber" href="#practice">Open Flip Cards</a>
+        <button class="btn" id="startPresent">Presentation Mode</button>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="orb">
+        <div class="atom a">Br</div><div class="atom b">Nu</div><div class="atom c">β-H</div><div class="atom d">LG</div>
+        <div class="molecule"><div class="formula">R₃C—X</div><div class="caption">Classify the carbon first</div></div>
+      </div>
+      <div class="floating-chip chip-1">Steric hindrance ↗</div>
+      <div class="floating-chip chip-2">Carbocation stability ↗</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="learn">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Roadmap</div><h2>Four factors decide</h2></div><p class="section-lead">No single factor decides alone. This lesson concentrates on Factor 1: the substrate.</p></div>
+    <div class="roadmap">
+      <article class="road-card active"><h3>Substrate</h3><p>Methyl, primary, secondary, or tertiary?</p></article>
+      <article class="road-card"><h3>Nucleophile / Base</h3><p>Strong and small, strong and bulky, or weak?</p></article>
+      <article class="road-card"><h3>Solvent</h3><p>Polar protic or polar aprotic?</p></article>
+      <article class="road-card"><h3>Temperature</h3><p>Low or mild conditions, or prolonged heating?</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Step one</div><h2>Find X. Classify C.</h2></div><p class="section-lead">First confirm that a good leaving group such as Cl, Br, I, OTs, or OMs is bonded to an sp³ carbon.</p></div>
+    <div class="classifier-wrap">
+      <div class="panel classifier-controls">
+        <div class="label">Select the substrate class</div>
+        <div class="substrate-buttons">
+          <button class="substrate-btn active" data-type="methyl"><strong>Methyl</strong><span>Bonded to 0 carbons</span></button>
+          <button class="substrate-btn" data-type="primary"><strong>Primary • 1°</strong><span>Bonded to 1 carbon</span></button>
+          <button class="substrate-btn" data-type="secondary"><strong>Secondary • 2°</strong><span>Bonded to 2 carbons</span></button>
+          <button class="substrate-btn" data-type="tertiary"><strong>Tertiary • 3°</strong><span>Bonded to 3 carbons</span></button>
+        </div>
+        <div class="exception"><strong>Trap:</strong> vinylic and aryl halides have X on an sp² carbon, so the usual SN1/SN2/E1/E2 framework does not apply.</div>
+      </div>
+      <div class="panel classifier-result" id="classifierResult" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Substrate rules</div><h2>Rule out before you choose</h2></div><p class="section-lead">Use the substrate to remove impossible mechanisms before analysing the reagent and conditions.</p></div>
+    <div class="rule-grid">
+      <article class="rule-card">
+        <div class="rule-no">1°</div><div class="headline">Expect SN2 — almost always.</div><h3>Primary / methyl</h3>
+        <ul><li>Minimal steric hindrance makes backside attack easy.</li><li>Primary carbocations are highly unstable, so SN1 and E1 are normally ruled out.</li><li>Form C–Nu, break C–LG, and invert a stereocentre when relevant.</li></ul>
+        <div class="exception"><strong>Exception 1:</strong> strong, bulky bases such as KOtBu or LDA can make E2 competitive.</div>
+        <div class="exception"><strong>Exception 2:</strong> primary allylic or benzylic substrates can ionise because resonance stabilises the carbocation.</div>
+      </article>
+      <article class="rule-card">
+        <div class="rule-no">2°</div><div class="headline">The “problem child”.</div><h3>Secondary</h3>
+        <p style="color:var(--muted);line-height:1.6">All four pathways are possible. The nucleophile/base and solvent become decisive.</p>
+        <table class="secondary-table"><thead><tr><th>Reagent character</th><th>Expect</th></tr></thead><tbody>
+          <tr><td>Good nucleophile, weak/moderate base</td><td><b>SN2</b></td></tr>
+          <tr><td>Alkoxide in polar aprotic solvent</td><td><b>SN2 favoured</b></td></tr>
+          <tr><td>Alkoxide in polar protic solvent</td><td><b>E2 favoured</b></td></tr>
+          <tr><td>Very strong base, e.g. acetylide</td><td><b>E2</b></td></tr>
+          <tr><td>H₂O or ROH</td><td><b>SN1 / E1</b></td></tr>
+        </tbody></table>
+      </article>
+      <article class="rule-card">
+        <div class="rule-no">3°</div><div class="headline">Rule out SN2 immediately.</div><h3>Tertiary</h3>
+        <ul><li>Three alkyl groups block the backside approach required for SN2.</li><li>With a strong base, expect E2.</li><li>With a weak nucleophile/base, ionisation gives SN1 and E1.</li><li>Heat shifts the SN1/E1 balance toward E1.</li></ul>
+        <div class="exception"><strong>Fast decision:</strong> 3° + strong base → E2. 3° + weak reagent → SN1/E1.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="decision">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Put it together</div><h2>The substrate decision flow</h2></div><p class="section-lead">This flow is the classroom shortcut. Conditions still matter, but the substrate tells you what can and cannot happen.</p></div>
+    <div class="panel flow-shell">
+      <div class="flow">
+        <div class="flow-node"><strong>Identify substrate</strong><span>Count carbon groups attached to the C–X carbon.</span></div>
+        <div class="arrow">→</div>
+        <div class="flow-node"><strong>Methyl / Primary</strong><span>SN2 expected. E2 only with a strong bulky base. Remember allylic/benzylic exceptions.</span></div>
+        <div class="flow-node"><strong>Secondary</strong><span>Nothing is ruled out. Check nucleophile/base strength, size, solvent, and heat.</span></div>
+        <div class="flow-node"><strong>Tertiary</strong><span>SN2 is out. Strong base → E2. Weak reagent → SN1/E1.</span></div>
+      </div>
+      <div class="alcohol-note">
+        <div class="note"><strong>Add base:</strong> R–OH is deprotonated to RO⁻, a much better nucleophile.</div>
+        <div class="note"><strong>Add acid:</strong> R–OH becomes R–OH₂⁺, creating a much better leaving group.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Quick reference</div><h2>Substrate cheat-sheet</h2></div><p class="section-lead">Use this table as a rapid ruling-out tool during live examples.</p></div>
+    <div class="cheat-wrap panel"><table class="cheat-table"><thead><tr><th>Substrate</th><th>SN2?</th><th>SN1?</th><th>E2?</th><th>E1?</th><th>Bottom line</th></tr></thead><tbody>
+      <tr><td>Methyl / 1°</td><td class="yes">YES</td><td class="no">NO*</td><td class="maybe">Bulky base</td><td class="no">NO*</td><td>Expect SN2</td></tr>
+      <tr><td>Secondary</td><td class="maybe">Possible</td><td class="maybe">Possible</td><td class="maybe">Possible</td><td class="maybe">Possible</td><td>Depends on Nu/base</td></tr>
+      <tr><td>Tertiary</td><td class="no">NO</td><td class="yes">Possible</td><td class="yes">Possible</td><td class="yes">Possible</td><td>Rule out SN2</td></tr>
+    </tbody></table></div>
+    <p class="source-note" style="margin-top:13px">*Primary allylic and benzylic substrates are important resonance-stabilised exceptions.</p>
+  </div>
+</section>
+
+<section class="section practice" id="practice">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Practice studio</div><h2>12 answer flip cards</h2></div><p class="section-lead">Choose an option, then flip the card. Use Present to project one question at a time.</p></div>
+    <div class="toolbar">
+      <div class="filters" id="filters"></div>
+      <div class="tools">
+        <button class="tool-btn" id="shuffleBtn">↻ Shuffle</button>
+        <button class="tool-btn" id="revealBtn">◫ Reveal all</button>
+        <button class="tool-btn" id="resetBtn">Reset</button>
+      </div>
+    </div>
+    <div class="progress-row"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text" id="progressText">0 of 12 revealed</div></div>
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Teacher flow</div><h2>Teach it in three moves</h2></div></div>
+    <div class="teacher-strip">
+      <article class="teacher-tip"><div class="num">01</div><h3>Classify aloud</h3><p>Ask students to point to the leaving-group carbon and count how many carbons are directly attached to it.</p></article>
+      <article class="teacher-tip"><div class="num">02</div><h3>Rule out</h3><p>Make students state what is impossible before they choose what is likely. This reduces guessing.</p></article>
+      <article class="teacher-tip"><div class="num">03</div><h3>Flip and explain</h3><p>Take a vote, flip the card, and connect the answer back to steric hindrance or carbocation stability.</p></article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="container footer-inner"><div><strong style="color:var(--text)">Science Wing Coaching Institute</strong><br>Chemistry • SN1 / SN2 / E1 / E2</div><div class="source-note">Interactive teaching website created from the uploaded “Deciding the Mechanism — Part 1: The Substrate” presentation. Designed to work offline in a modern browser.</div></div></footer>
+
+<div class="presentation" id="presentation" role="dialog" aria-modal="true" aria-label="Question presentation mode">
+  <div class="presentation-top"><div class="presentation-title" id="presentTitle">Question 1 of 12</div><button class="icon-btn" id="closePresent">✕</button></div>
+  <div class="presentation-stage"><div class="presentation-card" id="presentationCard"></div></div>
+  <div class="present-controls"><button class="btn" id="prevPresent">← Previous</button><button class="btn primary" id="flipPresent">Show answer</button><button class="btn" id="nextPresent">Next →</button></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const questions = [{"id": 1, "category": "Classify", "tag": "CLASSIFY", "question": "Classify the carbon bearing the leaving group in each: (i) (CH₃)₃C–Br   (ii) CH₃CH₂CH₂–Cl   (iii) (CH₃)₂CH–I", "options": ["(i) 3°, (ii) 1°, (iii) 2°", "(i) 2°, (ii) 1°, (iii) 3°", "(i) 1°, (ii) 2°, (iii) 3°", "(i) 3°, (ii) 2°, (iii) 1°"], "answer": 0, "explanation": "The bromine-bearing carbon in (CH₃)₃C–Br is attached to three methyl groups, so it is tertiary. In CH₃CH₂CH₂–Cl, the chlorine-bearing carbon is attached to only one other carbon, so it is primary. In (CH₃)₂CH–I, the iodine-bearing carbon is attached to two methyl groups, so it is secondary.", "mechanism": "3° • 1° • 2°"}, {"id": 2, "category": "Classify", "tag": "CLASSIFY", "question": "Bromocyclohexane and (bromomethyl)cyclohexane both contain a six-membered ring. How does the classification of the halogen-bearing carbon differ between them?", "options": ["Bromocyclohexane is secondary; (bromomethyl)cyclohexane is primary", "Both are secondary", "Both are tertiary", "Bromocyclohexane is primary; (bromomethyl)cyclohexane is secondary"], "answer": 0, "explanation": "In bromocyclohexane, Br is directly attached to a ring carbon bonded to two neighbouring ring carbons, so the carbon is secondary. In (bromomethyl)cyclohexane, Br is on an exocyclic CH₂ group bonded to only one carbon, so that carbon is primary.", "mechanism": "Ring position matters"}, {"id": 3, "category": "Primary", "tag": "PRIMARY", "question": "1-bromopropane is treated with sodium cyanide. Predict the mechanism and major product.", "options": ["SN2; butanenitrile (CH₃CH₂CH₂CN)", "SN1; propan-1-ol", "E2; propene", "No reaction"], "answer": 0, "explanation": "A primary substrate with a good, small nucleophile such as CN⁻ gives a classic SN2 reaction. Cyanide attacks the electrophilic carbon and displaces bromide, extending the carbon chain by one carbon to form butanenitrile.", "mechanism": "SN2"}, {"id": 4, "category": "Primary", "tag": "PRIMARY", "question": "1-bromobutane is treated with potassium tert-butoxide (KOtBu) at reflux. Which pathway now competes with SN2, and why?", "options": ["E2, because KOtBu is strong and sterically bulky, hindering backside attack", "SN1, because primary carbocations are stable", "No competing pathway is possible for a primary substrate", "SN2 remains totally dominant regardless of base"], "answer": 0, "explanation": "A strong, bulky base such as KOtBu struggles to make the backside attack required for SN2. It can instead remove a β-hydrogen, so E2 becomes competitive and may dominate under reflux conditions.", "mechanism": "E2 exception"}, {"id": 5, "category": "Primary", "tag": "PRIMARY", "question": "Butan-1-ol is treated with NaH, and the resulting species is then combined with 1-bromopropane. What happens?", "options": ["NaH forms sodium butoxide, which performs SN2 on 1-bromopropane to give butyl propyl ether", "NaH directly attacks the alkyl bromide as a hydride nucleophile", "No reaction occurs at any stage", "NaH reduces the alkyl bromide to propane"], "answer": 0, "explanation": "NaH acts as a base and deprotonates the alcohol to form an alkoxide. The alkoxide is a much better nucleophile and performs SN2 on the separate primary alkyl halide. This is a Williamson ether synthesis.", "mechanism": "Williamson SN2"}, {"id": 6, "category": "Primary", "tag": "PRIMARY • EXCEPTION", "question": "Consider 1-chloro-3-methylbut-2-ene, a primary allylic chloride, solvolysed in a water/ethanol mixture. Which mechanism becomes reasonable despite the primary classification?", "options": ["SN1, because the developing allylic cation is resonance-stabilised across two carbons", "SN2 exclusively, because the carbon is formally primary", "E2 exclusively", "No reaction is possible in a protic solvent"], "answer": 0, "explanation": "This is the allylic exception. Ionisation produces a carbocation whose positive charge is delocalised by resonance over two positions. In a strongly ionising, weakly nucleophilic solvent, SN1 can therefore become competitive or dominant.", "mechanism": "Allylic SN1"}, {"id": 7, "category": "Tertiary", "tag": "TERTIARY", "question": "2-bromo-2-methylbutane is heated with sodium ethoxide in ethanol at reflux. Predict the mechanism.", "options": ["E2, because SN2 is blocked at the tertiary centre and strong base plus heat favour elimination", "SN2, because ethoxide is a good nucleophile", "SN1 with no elimination", "No reaction occurs with a tertiary substrate"], "answer": 0, "explanation": "The tertiary centre rules out SN2. Sodium ethoxide is a strong base, and heating favours elimination, so E2 is expected, giving predominantly the more substituted alkene.", "mechanism": "E2"}, {"id": 8, "category": "Tertiary", "tag": "TERTIARY", "question": "tert-Butyl chloride is dissolved in a 50:50 water/acetone mixture at room temperature with no added base. What is the expected outcome?", "options": ["A mixture of SN1 (tert-butanol) and E1 (isobutylene)", "Exclusively SN2, because water is a nucleophile", "Exclusively E2, because room temperature implies heat", "No reaction occurs without an added base"], "answer": 0, "explanation": "SN2 is ruled out by the tertiary centre. The substrate can ionise to a stable tertiary carbocation. Water captures some carbocations to give tert-butanol by SN1, while β-hydrogen loss gives some alkene by E1.", "mechanism": "SN1 + E1"}, {"id": 9, "category": "Secondary", "tag": "SECONDARY", "question": "2-bromobutane is treated with sodium iodide in acetone, a polar aprotic solvent. Predict the dominant mechanism.", "options": ["SN2, because iodide is a good, mildly basic nucleophile and acetone favours SN2", "E2, because every secondary halide defaults to elimination", "SN1, because all secondary halides ionise readily", "No reaction occurs in acetone"], "answer": 0, "explanation": "Iodide is a good nucleophile and a relatively weak base. Acetone is polar aprotic and keeps iodide reactive. For a secondary substrate, this combination favours SN2 substitution.", "mechanism": "SN2"}, {"id": 10, "category": "Secondary", "tag": "SECONDARY", "question": "2-bromopentane is treated with sodium acetylide (HC≡C⁻ Na⁺). What is the expected major pathway, and why?", "options": ["E2, because acetylide is a very strong base and secondary substrates tend toward elimination", "SN2, because acetylide is a good nucleophile and that always wins", "SN1, because acetylide is neutral", "No reaction occurs with acetylide ions"], "answer": 0, "explanation": "Acetylide ions are very strong bases. With a secondary substrate, a base stronger than a typical alkoxide tends to push the reaction toward E2 rather than substitution.", "mechanism": "E2"}, {"id": 11, "category": "Alcohols", "tag": "ALCOHOLS", "question": "Butan-2-ol is heated with concentrated HBr. What activates the substrate, and what is the expected major product?", "options": ["Protonation changes –OH into –OH₂⁺; the activated secondary substrate gives 2-bromobutane", "The alcohol reacts directly by clean SN2 without activation", "Base first converts the alcohol into an alkoxide", "Alcohols do not react with HBr"], "answer": 0, "explanation": "Neutral –OH is a poor leaving group. Acid protonates it to –OH₂⁺, which is a much better leaving group. Bromide can then replace it to form 2-bromobutane; the source deck describes this secondary case as having SN1/SN2 borderline character.", "mechanism": "Activate –OH"}, {"id": 12, "category": "Alcohols", "tag": "ALCOHOLS", "question": "Why is a strong base used to activate an alcohol for a Williamson ether synthesis, and why is E2 not a competing pathway on the alcohol-derived species?", "options": ["Base forms RO⁻, which attacks a separate alkyl halide by SN2; the alcohol-derived species itself has no leaving group to eliminate", "Acid activation is always used for Williamson synthesis", "Base directly converts the alcohol into a leaving group", "E2 is the dominant Williamson pathway"], "answer": 0, "explanation": "The base deprotonates the alcohol to make RO⁻, a strong nucleophile. That alkoxide attacks a separate alkyl halide by SN2. The alkoxide is functioning as the nucleophile, not as an electrophilic substrate with a leaving group, so E2 does not occur on the alcohol-derived species in this setup.", "mechanism": "RO⁻ → SN2"}];
+const state = { filter:'All', order:[...questions], revealed:new Set(), selected:{}, presentIndex:0, presentAnswer:false };
+const classifierData = {
+  methyl:{formula:'CH₃–X',title:'Methyl substrate',copy:'The leaving-group carbon is bonded to zero other carbons. Steric hindrance is minimal, so SN2 is strongly favoured. SN1 and E1 would require an unstable methyl carbocation.'},
+  primary:{formula:'R–CH₂–X',title:'Primary • 1°',copy:'The leaving-group carbon is bonded to one other carbon. Expect SN2. E2 becomes important mainly with a strong, bulky base; allylic and benzylic substrates are resonance-stabilised exceptions.'},
+  secondary:{formula:'R₂CH–X',title:'Secondary • 2°',copy:'The leaving-group carbon is bonded to two other carbons. All four mechanisms remain possible, so the nucleophile/base, solvent, and temperature must decide.'},
+  tertiary:{formula:'R₃C–X',title:'Tertiary • 3°',copy:'The leaving-group carbon is bonded to three other carbons. Backside attack is blocked, so SN2 is ruled out. Strong base gives E2; weak conditions give SN1/E1.'}
+};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+function renderClassifier(type='methyl'){
+  const d=classifierData[type];
+  $('#classifierResult').innerHTML=`<div class="label">Classification result</div><div class="result-formula">${d.formula}</div><div class="result-title">${d.title}</div><p class="result-copy">${d.copy}</p>`;
+  $$('.substrate-btn').forEach(b=>b.classList.toggle('active',b.dataset.type===type));
+}
+function buildFilters(){
+  const categories=['All',...new Set(questions.map(q=>q.category))];
+  $('#filters').innerHTML=categories.map(c=>`<button class="filter-btn ${c==='All'?'active':''}" data-filter="${c}">${c}</button>`).join('');
+}
+function optionHTML(q, opt, idx){
+  const letter=String.fromCharCode(65+idx);
+  const selected=state.selected[q.id]===idx?'selected':'';
+  return `<button class="option ${selected}" data-q="${q.id}" data-option="${idx}"><span class="option-letter">${letter}</span><span>${opt}</span></button>`;
+}
+function cardHTML(q){
+  const a=q.answer, letter=String.fromCharCode(65+a), selected=state.selected[q.id];
+  const verdict= selected===undefined ? '' : `<div class="verdict show ${selected===a?'correct':'incorrect'}">${selected===a?'✓ Correct choice':'✕ Your choice was '+String.fromCharCode(65+selected)+'. The correct answer is '+letter+'.'}</div>`;
+  return `<article class="flip-card ${state.revealed.has(q.id)?'flipped':''}" data-id="${q.id}" data-category="${q.category}">
+    <div class="flip-inner">
+      <section class="card-face card-front">
+        <div class="card-meta"><span class="tag">${q.tag}</span><span class="q-no">QUESTION ${String(q.id).padStart(2,'0')}</span></div>
+        <p class="question">${q.question}</p>
+        <div class="options">${q.options.map((o,i)=>optionHTML(q,o,i)).join('')}</div>
+        <div class="card-actions"><button class="flip-btn" data-flip="${q.id}">Flip for answer ↻</button><button class="present-card-btn" data-present="${q.id}">Present ⛶</button></div>
+      </section>
+      <section class="card-face card-back">
+        <div><div class="answer-label">Correct answer</div><div class="answer-big">${letter} · ${q.mechanism}</div><div class="answer-option">${q.options[a]}</div>${verdict}<p class="explanation">${q.explanation}</p></div>
+        <button class="back-btn" data-flip="${q.id}">↻ Flip back to question</button>
+      </section>
+    </div>
+  </article>`;
+}
+function renderCards(){
+  $('#cardGrid').innerHTML=state.order.map(cardHTML).join('');
+  applyFilter(); updateProgress(); bindCardEvents();
+}
+function bindCardEvents(){
+  $$('[data-flip]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation(); toggleCard(Number(b.dataset.flip));}));
+  $$('.option').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation(); const q=Number(b.dataset.q), opt=Number(b.dataset.option); state.selected[q]=opt; renderCards();}));
+  $$('[data-present]').forEach(b=>b.addEventListener('click',()=>openPresentationById(Number(b.dataset.present))));
+}
+function toggleCard(id, force){
+  const card=document.querySelector(`.flip-card[data-id="${id}"]`);
+  const shouldFlip=force!==undefined?force:!card.classList.contains('flipped');
+  card.classList.toggle('flipped',shouldFlip);
+  if(shouldFlip) state.revealed.add(id); else state.revealed.delete(id);
+  updateProgress();
+}
+function applyFilter(){
+  $$('.flip-card').forEach(card=>card.classList.toggle('hidden', state.filter!=='All' && card.dataset.category!==state.filter));
+}
+function updateProgress(){
+  const n=state.revealed.size; $('#progressFill').style.width=(n/questions.length*100)+'%'; $('#progressText').textContent=`${n} of ${questions.length} revealed`;
+}
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toast.timer); toast.timer=setTimeout(()=>t.classList.remove('show'),1800); }
+function openPresentationById(id){ state.presentIndex=state.order.findIndex(q=>q.id===id); if(state.presentIndex<0)state.presentIndex=0; state.presentAnswer=false; $('#presentation').classList.add('open'); document.body.style.overflow='hidden'; renderPresentation(); }
+function renderPresentation(){
+  const q=state.order[state.presentIndex], letter=String.fromCharCode(65+q.answer);
+  $('#presentTitle').textContent=`Question ${state.presentIndex+1} of ${state.order.length} • ${q.category}`;
+  $('#presentationCard').innerHTML=`<div class="card-meta"><span class="tag">${q.tag}</span><span class="q-no">Q${String(q.id).padStart(2,'0')}</span></div><p class="question">${q.question}</p><div class="options">${q.options.map((o,i)=>`<div class="option"><span class="option-letter">${String.fromCharCode(65+i)}</span><span>${o}</span></div>`).join('')}</div><div class="present-answer ${state.presentAnswer?'show':''}"><div class="answer-label">Correct answer</div><div class="answer-big">${letter} · ${q.mechanism}</div><div class="answer-option">${q.options[q.answer]}</div><p class="explanation">${q.explanation}</p></div>`;
+  $('#flipPresent').textContent=state.presentAnswer?'Hide answer':'Show answer';
+}
+function closePresentation(){ $('#presentation').classList.remove('open'); document.body.style.overflow=''; }
+function movePresentation(delta){ state.presentIndex=(state.presentIndex+delta+state.order.length)%state.order.length; state.presentAnswer=false; renderPresentation(); }
+
+renderClassifier(); buildFilters(); renderCards();
+$$('.substrate-btn').forEach(b=>b.addEventListener('click',()=>renderClassifier(b.dataset.type)));
+$('#filters').addEventListener('click',e=>{ const b=e.target.closest('[data-filter]'); if(!b)return; state.filter=b.dataset.filter; $$('.filter-btn').forEach(x=>x.classList.toggle('active',x===b)); applyFilter(); });
+$('#shuffleBtn').addEventListener('click',()=>{ state.order=[...state.order].sort(()=>Math.random()-.5); renderCards(); toast('Cards shuffled'); });
+$('#revealBtn').addEventListener('click',()=>{ const reveal=state.revealed.size!==questions.length; state.revealed= new Set(reveal?questions.map(q=>q.id):[]); renderCards(); $('#revealBtn').textContent=reveal?'◫ Hide all':'◫ Reveal all'; });
+$('#resetBtn').addEventListener('click',()=>{ state.order=[...questions]; state.revealed.clear(); state.selected={}; state.filter='All'; $$('.filter-btn').forEach(x=>x.classList.toggle('active',x.dataset.filter==='All')); renderCards(); toast('Practice reset'); });
+$('#themeBtn').addEventListener('click',()=>{ const light=document.documentElement.dataset.theme==='light'; document.documentElement.dataset.theme=light?'dark':'light'; localStorage.setItem('sw-theme',light?'dark':'light'); });
+const savedTheme=localStorage.getItem('sw-theme'); if(savedTheme)document.documentElement.dataset.theme=savedTheme;
+$('#fullBtn').addEventListener('click',()=>{ if(!document.fullscreenElement)document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); });
+$('#startPresent').addEventListener('click',()=>openPresentationById(state.order[0].id));
+$('#closePresent').addEventListener('click',closePresentation);
+$('#prevPresent').addEventListener('click',()=>movePresentation(-1));
+$('#nextPresent').addEventListener('click',()=>movePresentation(1));
+$('#flipPresent').addEventListener('click',()=>{ state.presentAnswer=!state.presentAnswer; if(state.presentAnswer)state.revealed.add(state.order[state.presentIndex].id); renderPresentation(); updateProgress(); });
+document.addEventListener('keydown',e=>{ if(!$('#presentation').classList.contains('open'))return; if(e.key==='ArrowRight')movePresentation(1); if(e.key==='ArrowLeft')movePresentation(-1); if(e.key===' '){e.preventDefault(); state.presentAnswer=!state.presentAnswer; renderPresentation();} if(e.key==='Escape')closePresentation(); });
+</script>
+</body>
+</html>
